@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/base/checkbox/checkbox";
 import { Divider } from "@/components/base/divider/divider";
 import { Input } from "@/components/base/input/input";
 import { Comparison2 } from "@/components/ui/comparison-2";
+import { contact } from "@/components/ui/legal-page";
 import OnboardingBlock from "@/components/ui/onboarding-setup-steps";
 import { cx } from "@/utils/cx";
 
@@ -177,7 +178,7 @@ export default function Home() {
                     <Input label="Phone Number" name="phone" type="tel" autoComplete="tel" placeholder="(555) 123-4567" isRequired validationBehavior="native" fieldClassName="offer-field" inputClassName="text-headline-regular" />
                     <Input label="Property Address" name="address" autoComplete="street-address" placeholder="Street address, city, state, ZIP" leadingIcon={RiMapPinLine} isRequired validationBehavior="native" fieldClassName="offer-field" inputClassName="text-headline-regular" />
                     <Checkbox name="sms_consent" value="yes" className="items-start [&>span:last-child]:text-caption-1-regular [&>span:last-child]:text-text-secondary">
-                      I agree to receive text messages from Genesis Home Buyers LLC about my property inquiry, including offer updates and appointment reminders, at the phone number provided. Consent is not a condition of any sale. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out or HELP for help. See our <a href="/privacy" target="_blank" className="text-accent-700 underline underline-offset-2">Privacy Policy</a> and <a href="/terms" target="_blank" className="text-accent-700 underline underline-offset-2">Terms &amp; Conditions</a>.
+                      I agree to receive text messages from Genesis Home Buyers LLC at the phone number provided, including offer updates, appointment reminders, and promotional messages about our home-buying services, possibly sent using automated technology. Consent is not a condition of any sale. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out or HELP for help. See our <a href="/privacy" target="_blank" className="text-accent-700 underline underline-offset-2">Privacy Policy</a> and <a href="/terms" target="_blank" className="text-accent-700 underline underline-offset-2">Terms &amp; Conditions</a>.
                     </Checkbox>
                     <Button type="submit" trailingIcon={RiArrowRightLine} disabled={submission === "sending"} className="mt-2 h-12 w-full rounded-xl text-headline-semibold">{submission === "sending" ? "Sending Your Request…" : "Get My Cash Offer"}</Button>
                     {submission === "error" && <p role="alert" className="text-body-regular text-text-error-primary">We couldn’t send your request. Your details are still here — please try again.</p>}
@@ -252,10 +253,19 @@ export default function Home() {
       </main>
       <footer className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-5 px-5 pb-8 text-center text-body-regular text-text-secondary sm:flex-row sm:px-8 sm:text-left">
         <GenesisLogo />
+        <address className="flex flex-col items-center gap-1 not-italic sm:items-start">
+          <span>{contact.address}</span>
+          <span>
+            <a href={contact.phoneHref} className="rounded-md text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">{contact.phone}</a>
+            {" · "}
+            <a href={`mailto:${contact.email}`} className="rounded-md text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">{contact.email}</a>
+          </span>
+        </address>
         <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
           <p>© 2026 Genesis Home Buyers LLC.</p>
           <a href="/privacy" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</a>
           <a href="/terms" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</a>
+          <a href="/text-us" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Text Us</a>
         </div>
       </footer>
     </>
