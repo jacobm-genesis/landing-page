@@ -9,6 +9,7 @@ import {
 import { Avatar } from "@/components/base/avatar/avatar";
 import { Badge } from "@/components/base/badges/badge";
 import { Button, ButtonLink } from "@/components/base/buttons/button";
+import { Checkbox } from "@/components/base/checkbox/checkbox";
 import { Divider } from "@/components/base/divider/divider";
 import { Input } from "@/components/base/input/input";
 import { Comparison2 } from "@/components/ui/comparison-2";
@@ -22,9 +23,9 @@ const navLinks = [
 ];
 
 const teamMembers = [
-  { name: "Dustin Fox", photo: "/team/dustin-fox.jpg" },
-  { name: "Jacob Monoson", photo: "/team/jacob-monoson.jpg" },
-  { name: "Devon Nicol", photo: "/team/devon-nicol.jpg" },
+  { name: "Dustin Fox", photo: "/team/dustin-fox.jpg", title: "Co-Founder & COO" },
+  { name: "Jacob Monoson", photo: "/team/jacob-monoson.jpg", title: "Founder & CEO" },
+  { name: "Devon Nicol", photo: "/team/devon-nicol.jpg", title: "Vice President" },
 ];
 
 const reasons = [
@@ -175,6 +176,9 @@ export default function Home() {
                     </div>
                     <Input label="Phone Number" name="phone" type="tel" autoComplete="tel" placeholder="(555) 123-4567" isRequired validationBehavior="native" fieldClassName="offer-field" inputClassName="text-headline-regular" />
                     <Input label="Property Address" name="address" autoComplete="street-address" placeholder="Street address, city, state, ZIP" leadingIcon={RiMapPinLine} isRequired validationBehavior="native" fieldClassName="offer-field" inputClassName="text-headline-regular" />
+                    <Checkbox name="sms_consent" value="yes" className="items-start [&>span:last-child]:text-caption-1-regular [&>span:last-child]:text-text-secondary">
+                      I agree to receive text messages from Genesis Home Buyers LLC about my property inquiry, including offer updates and appointment reminders, at the phone number provided. Consent is not a condition of any sale. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out or HELP for help. See our <a href="/privacy" target="_blank" className="text-accent-700 underline underline-offset-2">Privacy Policy</a> and <a href="/terms" target="_blank" className="text-accent-700 underline underline-offset-2">Terms &amp; Conditions</a>.
+                    </Checkbox>
                     <Button type="submit" trailingIcon={RiArrowRightLine} disabled={submission === "sending"} className="mt-2 h-12 w-full rounded-xl text-headline-semibold">{submission === "sending" ? "Sending Your Request…" : "Get My Cash Offer"}</Button>
                     {submission === "error" && <p role="alert" className="text-body-regular text-text-error-primary">We couldn’t send your request. Your details are still here — please try again.</p>}
                   </form>
@@ -196,10 +200,10 @@ export default function Home() {
                 <p className="mb-3 text-caption-1-semibold tracking-widest text-accent-600">GOOD PEOPLE. STRAIGHTFORWARD OFFERS.</p>
                 <h2 id="why-heading" className="text-display-4-bold text-accent-950 sm:text-display-3-bold">Why Homeowners<br />Choose Genesis</h2>
               </div>
-              <p className="max-w-sm text-headline-regular text-text-secondary">For over 5 years we&apos;ve helped homeowners sell quickly and move forward.</p>
+              <p className="max-w-sm text-headline-regular text-text-secondary">For over 3 years we&apos;ve helped homeowners sell quickly and move forward.</p>
             </div>
             <dl className="genesis-glass genesis-glass-dark my-10 grid grid-cols-2 gap-x-4 gap-y-8 rounded-3xl border border-border-button-default px-4 py-8 text-center md:grid-cols-4 md:gap-0 md:py-10">
-              {[["5+", "Years in Business"], ["100+", "Homes Purchased"], ["24hr", "Offer Turnaround"], ["$0", "Fees or Commissions"]].map(([value, label]) => (
+              {[["3+", "Years in Business"], ["100+", "Homes Purchased"], ["24hr", "Offer Turnaround"], ["$0", "Fees or Commissions"]].map(([value, label]) => (
                 <div key={label} className="stat-cell flex flex-col-reverse gap-2 px-2"><dt className="text-body-medium text-accent-100">{label}</dt><dd className="text-display-3-semibold text-accent-300 sm:text-display-2-semibold">{value}</dd></div>
               ))}
             </dl>
@@ -224,12 +228,12 @@ export default function Home() {
               <h2 id="team-heading" className="text-display-4-bold text-accent-950 sm:text-display-3-bold">Meet the Team</h2>
             </div>
             <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {teamMembers.map(({ name, photo }) => (
+              {teamMembers.map(({ name, photo, title }) => (
                 <article key={name} className="team-card relative flex flex-col items-center overflow-hidden rounded-3xl border border-border-button-default bg-background-primary-default px-7 pb-8 pt-10 text-center">
                   <div aria-hidden className="absolute inset-x-0 top-0 h-24 border-b border-accent-200 bg-accent-50" />
                   <Avatar src={photo} alt={name} className="relative size-28 border-4 border-background-primary-default bg-accent-200 shadow-sm [&_img]:object-top" />
                   <h3 className="mt-5 text-title-2-semibold text-accent-950">{name}</h3>
-                  <Badge className="mt-2 rounded-full bg-accent-50 px-3 py-1 text-caption-1-medium text-accent-700">Genesis Home Buyers</Badge>
+                  <Badge className="mt-2 rounded-full bg-accent-50 px-3 py-1 text-caption-1-medium text-accent-700">{title}</Badge>
                 </article>
               ))}
             </div>
@@ -248,7 +252,11 @@ export default function Home() {
       </main>
       <footer className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-5 px-5 pb-8 text-center text-body-regular text-text-secondary sm:flex-row sm:px-8 sm:text-left">
         <GenesisLogo />
-        <p>© 2026 Genesis Home Buyers LLC.</p>
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
+          <p>© 2026 Genesis Home Buyers LLC.</p>
+          <a href="/privacy" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</a>
+          <a href="/terms" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</a>
+        </div>
       </footer>
     </>
   );
