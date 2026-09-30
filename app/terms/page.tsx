@@ -27,7 +27,7 @@ const sections: LegalSection[] = [
       <>
         <p><strong>Program description:</strong> When you opt in, {company} will send you text messages, which may be sent using automated technology. These include messages about your property inquiry (such as offer updates, appointment scheduling and reminders, and follow-up on your request) and marketing and promotional messages about our home-buying services.</p>
         <ul>
-          <li><strong>How to opt in:</strong> Check the text message consent box on our offer form, submit your mobile number and check the consent box in the chat widget on our <Link href="/text-us" className="text-accent-700 underline underline-offset-4">Text Us</Link> page, or text us first. Consent is not required to request an offer and is not a condition of any sale or purchase.</li>
+          <li><strong>How to opt in:</strong> Check the optional text message consent box when you submit your information through the offer form on our website, or text us first. Consent is not required to request an offer and is not a condition of any sale or purchase.</li>
           <li><strong>Message frequency:</strong> Message frequency varies based on your inquiry.</li>
           <li><strong>Costs:</strong> Message and data rates may apply according to your mobile carrier plan.</li>
           <li><strong>How to opt out:</strong> Text <strong>STOP</strong> to any message to cancel. You will receive one final confirmation message, and then no further messages will be sent. To rejoin, text <strong>START</strong> or opt in again on our website.</li>
