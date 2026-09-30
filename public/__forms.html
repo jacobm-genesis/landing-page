@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Genesis offer form definition</title>
+  </head>
+  <body>
+    <!-- Netlify detects this static definition when deploying Next.js. Keep field names in sync with app/page.tsx. -->
+    <form name="offer" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="offer" />
+      <input name="bot-field" type="text" />
+      <input name="name" type="text" required />
+      <input name="email" type="email" required />
+      <input name="phone" type="tel" required />
+      <input name="address" type="text" required />
+    </form>
+  </body>
+</html>
