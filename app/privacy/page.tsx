@@ -40,7 +40,7 @@ const sections: LegalSection[] = [
       <>
         <p>If you provide your mobile number and consent to receive text messages, {company} may send you SMS messages, which may be sent using automated technology. These include messages about your property inquiry (such as offer updates, appointment scheduling and reminders, and follow-up on your request) and marketing and promotional messages about our home-buying services.</p>
         <ul>
-          <li><strong>Consent:</strong> You opt in by checking the optional text message consent box when you submit your information through the offer form on our website, or by texting us first. Consent to receive text messages is not a condition of selling your property or of any purchase.</li>
+          <li><strong>Consent:</strong> You opt in by checking one or both of the optional text message consent boxes (one for non-marketing messages about your inquiry, one for marketing messages) when you submit the offer form on our website, or by texting us first. Consent to receive text messages is not a condition of selling your property or of any purchase.</li>
           <li><strong>Message frequency:</strong> Message frequency varies based on your inquiry.</li>
           <li><strong>Costs:</strong> Message and data rates may apply according to your mobile carrier plan.</li>
           <li><strong>Opt out:</strong> Reply <strong>STOP</strong> to any message at any time to unsubscribe. You will receive one final message confirming you have been unsubscribed, and no further messages will be sent.</li>
