@@ -18,7 +18,7 @@ const listingCosts = [
   { label: "Agent commission (5.5%)", amount: 16_500 },
   { label: "Repairs & prep to list", amount: 15_000 },
   { label: "Price reductions (3%)", amount: 9_000 },
-  { label: "Seller closing costs", amount: 4_500 },
+  { label: "Seller closing costs", amount: 4_500, genesis: "$0 — we pay" },
   { label: `Mortgage interest (${monthsListed} mo)`, amount: monthlyMortgageInterest * monthsListed },
   { label: `Insurance & utilities (${monthsListed} mo)`, amount: monthlyInsuranceAndUtilities * monthsListed },
   { label: `Prorated property taxes (${monthsListed} mo)`, amount: monthlyPropertyTaxes * monthsListed },
@@ -29,15 +29,14 @@ const listingNet = listPrice - listingCosts.reduce((sum, { amount }) => sum + am
 const difference = listingNet - genesisOffer;
 const usd = (value: number) => `$${value.toLocaleString("en-US")}`;
 
+// Only what the dollar cards can't show; fees, repairs, and monthly bills are already itemized there.
 const comparisonRows = [
   { traditional: `${monthsListed}+ months to sell and close`, genesis: "Close in as little as 7 days" },
-  { traditional: "5–6% agent commission", genesis: "Zero fees or commissions" },
-  { traditional: "You pay closing costs", genesis: "We pay closing costs" },
-  { traditional: "Repairs before you list", genesis: "Sell completely as-is" },
-  { traditional: "Mortgage, taxes & bills every month", genesis: "No months of carrying costs" },
-  { traditional: "Price cut after price cut", genesis: "One clear cash offer" },
   { traditional: "Strangers touring your home", genesis: "No showings, ever" },
+  { traditional: "Price cut after price cut", genesis: "One clear cash offer" },
+  { traditional: "Buyer’s loan can fall through", genesis: "Cash — no financing risk" },
   { traditional: "Vacant home invites squatters", genesis: "Done before it sits empty" },
+  { traditional: "Closing on the buyer’s schedule", genesis: "You pick your closing day" },
 ];
 
 const differenceBuys = [
@@ -49,20 +48,38 @@ const differenceBuys = [
   "Cash on the day you choose",
 ];
 
-function PayoutCard({ option }: { option: "traditional" | "genesis" }) {
+// Phone-only at-a-glance strip: both take-home numbers side by side before the detail cards.
+function PayoutSummary() {
+  return (
+    <div aria-hidden className="mt-8 grid grid-cols-2 overflow-hidden rounded-3xl border border-border-button-default md:hidden">
+      <div className="bg-background-primary-default p-4">
+        <p className="text-caption-1-semibold tracking-widest text-text-secondary">LIST IT</p>
+        <p className="mt-1 text-title-2-bold text-text-error-primary">{usd(listingNet)}</p>
+        <p className="text-caption-1-medium text-text-secondary">after {monthsListed}+ months</p>
+      </div>
+      <div className="bg-accent-950 p-4">
+        <p className="text-caption-1-semibold tracking-widest text-accent-300">SELL TO US</p>
+        <p className="mt-1 text-title-2-bold text-accent-300">{usd(genesisOffer)}</p>
+        <p className="text-caption-1-medium text-accent-100">in as little as 7 days</p>
+      </div>
+    </div>
+  );
+}
+
+function PayoutCard({ option, className }: { option: "traditional" | "genesis"; className?: string }) {
   const isGenesis = option === "genesis";
   return (
-    <article aria-label={isGenesis ? "Selling to Genesis: what you walk away with" : "Listing with an agent: what you walk away with"} className={cx("flex flex-col rounded-3xl border p-6", isGenesis ? "border-accent-800 bg-accent-950 text-accent-50" : "border-border-button-default bg-background-primary-default")}>
+    <article aria-label={isGenesis ? "Selling to Genesis: what you walk away with" : "Listing with an agent: what you walk away with"} className={cx("flex flex-col rounded-3xl border p-6", className, isGenesis ? "border-accent-800 bg-accent-950 text-accent-50" : "border-border-button-default bg-background-primary-default")}>
       <p className={cx("text-caption-1-semibold tracking-widest", isGenesis ? "text-accent-300" : "text-text-secondary")}>{isGenesis ? "SELL TO GENESIS" : "LIST WITH AN AGENT"}</p>
       <div className="mt-4 flex items-baseline justify-between gap-3">
         <span className={cx("text-body-medium", isGenesis ? "text-accent-100" : "text-text-secondary")}>{isGenesis ? "Cash offer" : "List price"}</span>
         <span className={cx("text-headline-semibold", isGenesis ? "text-accent-50" : "text-text-primary")}>{usd(isGenesis ? genesisOffer : listPrice)}</span>
       </div>
       <dl className={cx("mt-3 flex flex-col divide-y border-y", isGenesis ? "divide-accent-100/15 border-accent-100/15" : "divide-separator-border border-separator-border")}>
-        {listingCosts.map(({ label, amount }) => (
+        {listingCosts.map(({ label, amount, genesis }) => (
           <div key={label} className="flex items-baseline justify-between gap-3 py-2">
             <dt className={cx("text-body-regular", isGenesis ? "text-accent-100" : "text-text-secondary")}>{isGenesis ? label.replace(/ \(.*\)$/, "") : label}</dt>
-            <dd className={cx("shrink-0 text-body-semibold", isGenesis ? "text-accent-300" : "text-text-error-primary")}>{isGenesis ? "$0" : `−${usd(amount)}`}</dd>
+            <dd className={cx("shrink-0 text-body-semibold", isGenesis ? "text-accent-300" : "text-text-error-primary")}>{isGenesis ? (genesis ?? "$0") : `−${usd(amount)}`}</dd>
           </div>
         ))}
       </dl>
@@ -73,11 +90,11 @@ function PayoutCard({ option }: { option: "traditional" | "genesis" }) {
   );
 }
 
-function ProcessCard({ option }: { option: "traditional" | "genesis" }) {
+function ProcessCard({ option, className }: { option: "traditional" | "genesis"; className?: string }) {
   const isGenesis = option === "genesis";
   const Icon = isGenesis ? RiCheckLine : RiCloseLine;
   return (
-    <article aria-labelledby={`${option}-process-title`} className={cx("rounded-3xl border p-6", isGenesis ? "border-accent-200 bg-accent-50" : "border-border-button-default bg-background-primary-default")}>
+    <article aria-labelledby={`${option}-process-title`} className={cx("rounded-3xl border p-6", className, isGenesis ? "border-accent-200 bg-accent-50" : "border-border-button-default bg-background-primary-default")}>
       <h3 id={`${option}-process-title`} className={cx("text-caption-1-semibold tracking-widest", isGenesis ? "text-accent-700" : "text-text-secondary")}>{isGenesis ? "THE GENESIS WAY" : "THE TRADITIONAL WAY"}</h3>
       <ul className="mt-3 flex flex-col">
         {comparisonRows.map((row) => (
@@ -101,11 +118,14 @@ export function Comparison2() {
           <p className="mt-4 text-headline-regular text-text-secondary">Same $300,000 Jacksonville house. Two ways to sell it.</p>
         </div>
 
-        <div className="mt-10 grid gap-4 md:mt-12 md:grid-cols-2 xl:grid-cols-4">
-          <PayoutCard option="traditional" />
-          <ProcessCard option="traditional" />
-          <ProcessCard option="genesis" />
-          <PayoutCard option="genesis" />
+        <PayoutSummary />
+
+        {/* Phones and tablets: both payouts first, then the two lists. Wide screens: red → lists → green. */}
+        <div className="mt-4 grid gap-4 md:mt-12 md:grid-cols-2 xl:grid-cols-4">
+          <PayoutCard option="traditional" className="order-1" />
+          <ProcessCard option="traditional" className="order-3 xl:order-2" />
+          <ProcessCard option="genesis" className="order-4 xl:order-3" />
+          <PayoutCard option="genesis" className="order-2 xl:order-4" />
         </div>
 
         <div className="mx-auto mt-8 max-w-4xl rounded-3xl border border-accent-200 bg-accent-50 p-6 text-center sm:mt-10 sm:p-8">
