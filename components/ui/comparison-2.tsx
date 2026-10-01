@@ -3,27 +3,31 @@ import { Badge } from "@/components/base/badges/badge";
 import { ButtonLink } from "@/components/base/buttons/button";
 import { cx } from "@/utils/cx";
 
-// One worked example: a $300,000 Jacksonville home that sells after 5 months on the market.
+// One worked example: a $300,000 Jacksonville home that sells after 6 months on the market.
 // Costs are typical figures for that scenario; the offer is within Genesis's typical $200k–$230k range.
 const listPrice = 300_000;
-const monthsListed = 5;
+const monthsListed = 6;
 const genesisOffer = 230_000;
+
+// Monthly carrying costs while the home is listed.
+const monthlyMortgageInterest = 880;
+const monthlyInsuranceAndUtilities = 500;
+const monthlyPropertyTaxes = 440; // ~$5,280/yr, prorated
 
 const listingCosts = [
   { label: "Agent commission (5.5%)", amount: 16_500 },
   { label: "Repairs & prep to list", amount: 15_000 },
   { label: "Price reductions (3%)", amount: 9_000 },
   { label: "Seller closing costs", amount: 4_500 },
-  { label: `Mortgage interest (${monthsListed} mo)`, amount: 4_400 },
-  { label: `Insurance & utilities (${monthsListed} mo)`, amount: 2_500 },
-  { label: `Prorated property taxes (${monthsListed} mo)`, amount: 2_200 },
+  { label: `Mortgage interest (${monthsListed} mo)`, amount: monthlyMortgageInterest * monthsListed },
+  { label: `Insurance & utilities (${monthsListed} mo)`, amount: monthlyInsuranceAndUtilities * monthsListed },
+  { label: `Prorated property taxes (${monthsListed} mo)`, amount: monthlyPropertyTaxes * monthsListed },
   { label: "Inspection repair credits", amount: 3_000 },
 ];
 
 const listingNet = listPrice - listingCosts.reduce((sum, { amount }) => sum + amount, 0);
 const difference = listingNet - genesisOffer;
 const usd = (value: number) => `$${value.toLocaleString("en-US")}`;
-const roundedDifference = `$${Math.round(difference / 1000)}k`;
 
 const comparisonRows = [
   { traditional: `${monthsListed}+ months to sell and close`, genesis: "Close in as little as 7 days" },
@@ -106,7 +110,7 @@ export function Comparison2() {
 
         <div className="mx-auto mt-8 max-w-4xl rounded-3xl border border-accent-200 bg-accent-50 p-6 text-center sm:mt-10 sm:p-8">
           <p className="text-caption-1-semibold tracking-widest text-accent-700">THE REAL DIFFERENCE</p>
-          <h3 className="mt-2 text-title-1-bold text-accent-950">About {roundedDifference}. Here’s what it buys you.</h3>
+          <h3 className="mt-2 text-title-1-bold text-accent-950">{usd(difference)}. Here’s what it buys you.</h3>
           <ul className="mt-5 flex flex-wrap justify-center gap-2">
             {differenceBuys.map((item) => (
               <li key={item} className="flex items-center gap-2 rounded-full border border-accent-200 bg-background-primary-default px-4 py-2 text-body-medium text-accent-950">
