@@ -6,8 +6,8 @@ export const company = "Genesis Home Buyers LLC";
 
 export const contact = {
   email: "jacobm@genesishomebuyers.co",
-  phone: "(904) 882-8360",
-  phoneHref: "tel:+19048828360",
+  phone: "(904) 937-8390",
+  phoneHref: "tel:+19049378390",
   address: "9507 Egrets Landing Dr, Jacksonville, FL 32257",
 };
 
