@@ -125,7 +125,7 @@ export default function Home() {
       </header>
       <main id="main">
         <section className="genesis-hero relative flex min-h-svh w-full items-center bg-accent-950 text-text-white" aria-labelledby="hero-heading">
-          <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-20 pt-32 sm:px-8 sm:pt-36 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-40 xl:px-10">
+          <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-20 pt-32 sm:px-8 sm:pt-36 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-28 xl:px-10">
             <div className="hero-copy min-w-0 lg:col-span-7">
               <Badge className="mb-6 gap-2 rounded-full border border-accent-200/60 bg-accent-950/50 px-4 py-2 text-body-medium text-accent-50">
                 <RiHome4Line className="size-4" aria-hidden /> A fresh start begins here
@@ -154,9 +154,9 @@ export default function Home() {
             </div>
             <div className="offer-stack relative isolate min-w-0 lg:col-span-5">
               <div aria-hidden className="pointer-events-none absolute inset-0 translate-x-2 translate-y-3 rotate-2 rounded-3xl border border-border-button-default bg-accent-200/80 sm:translate-x-3 sm:translate-y-4" />
-              <div id="offer" className="offer-card relative w-full scroll-mt-40 rounded-3xl border border-border-button-default bg-background-primary-default p-5 text-text-primary shadow-xl sm:p-7 md:scroll-mt-28">
-                <div className="mb-6">
-                  <div className="mb-4 flex items-center gap-3">
+              <div id="offer" className="offer-card relative w-full scroll-mt-40 rounded-3xl border border-border-button-default bg-background-primary-default p-5 text-text-primary shadow-xl sm:p-7 md:scroll-mt-28 lg:p-6">
+                <div className="mb-6 lg:mb-5">
+                  <div className="mb-4 flex items-center gap-3 lg:mb-3">
                     <span className="form-icon flex size-11 shrink-0 items-center justify-center rounded-xl text-text-white"><RiHome4Line className="size-6" aria-hidden /></span>
                     <span className="text-caption-1-semibold tracking-widest text-accent-700">YOUR NEXT CHAPTER<br />STARTS HERE</span>
                   </div>
@@ -170,7 +170,7 @@ export default function Home() {
                     <p className="text-headline-regular text-text-secondary">Thank you for reaching out. The Genesis team will contact you to learn more about your property.</p>
                   </div>
                 ) : (
-                  <form name="offer" method="POST" action="/__forms.html" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={submitOffer} className="flex flex-col gap-4" aria-busy={submission === "sending"}>
+                  <form name="offer" method="POST" action="/__forms.html" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={submitOffer} className="flex flex-col gap-4 lg:gap-3" aria-busy={submission === "sending"}>
                     <input type="hidden" name="form-name" value="offer" />
                     <div hidden aria-hidden="true">
                       <Input label="Leave this field empty" name="bot-field" autoComplete="off" />
