@@ -135,7 +135,7 @@ export default function Home() {
                 <span className="hero-highlight text-accent-300">Fast, For Cash</span><br />
                 <span className="sm:whitespace-nowrap">— Any Condition</span>
               </h1>
-              <p className="mt-6 max-w-lg text-title-3-regular text-accent-50">Skip the repairs, the showings, and the agent fees. Genesis Home Buyers makes fair cash offers and closes on your timeline.</p>
+              <p className="mt-6 max-w-lg text-title-3-regular text-accent-50">Skip the repairs, the showings, and the agent fees. Genesis Home Buyers makes fair cash offers to Jacksonville homeowners and closes on your timeline.</p>
               <ul className="mt-8 grid gap-3 sm:grid-cols-3">
                 {[
                   { icon: RiFlashlightLine, value: "24hr", text: "Fair cash offer within 24 hours" },
