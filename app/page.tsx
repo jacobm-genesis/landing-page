@@ -4,7 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import {
   RiArrowRightLine, RiCalendarCheckLine,
   RiHeartLine, RiHome4Line, RiMapPinLine, RiShieldCheckLine,
-  RiFlashlightLine, RiCoinsLine, RiArrowRightUpLine, RiMenu3Line, RiCloseLine,
+  RiFlashlightLine, RiCoinsLine, RiArrowRightUpLine, RiMenu3Line, RiCloseLine, RiPhoneLine,
 } from "@remixicon/react";
 import { Avatar } from "@/components/base/avatar/avatar";
 import { Badge } from "@/components/base/badges/badge";
@@ -106,8 +106,12 @@ export default function Home() {
               <a key={href} href={href} aria-current={activeSection === href ? "location" : undefined} className={cx("nav-link whitespace-nowrap px-2 py-2", activeSection === href ? "bg-accent-100/70 text-accent-950" : "text-text-secondary")}>{label}</a>
             ))}
           </nav>
-          <ButtonLink href="#offer" aria-label="Get My Offer" iconOnly={isScrolled} leadingIcon={isScrolled ? RiArrowRightUpLine : undefined} trailingIcon={!isScrolled ? RiArrowRightUpLine : undefined} className={cx("hidden h-10 shrink-0 rounded-full md:inline-flex", isScrolled ? "w-10 p-0" : "px-4")}>Get My Offer</ButtonLink>
-          <Button variant="ghost" iconOnly leadingIcon={isMenuOpen ? RiCloseLine : RiMenu3Line} aria-label={isMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMenuOpen} aria-controls="mobile-navigation" popoverTarget="mobile-navigation" className="size-11 shrink-0 rounded-full text-accent-950 md:hidden" />
+          <div className="flex shrink-0 items-center gap-1 md:gap-2">
+            <ButtonLink href={contact.phoneHref} variant="ghost" iconOnly leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className="size-11 shrink-0 rounded-full text-accent-950 md:size-10 lg:hidden" />
+            <ButtonLink href={contact.phoneHref} variant="ghost" leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className="hidden h-10 shrink-0 rounded-full px-3 text-accent-950 lg:inline-flex">{contact.phone}</ButtonLink>
+            <ButtonLink href="#offer" aria-label="Get My Offer" iconOnly={isScrolled} leadingIcon={isScrolled ? RiArrowRightUpLine : undefined} trailingIcon={!isScrolled ? RiArrowRightUpLine : undefined} className={cx("hidden h-10 shrink-0 rounded-full md:inline-flex", isScrolled ? "w-10 p-0" : "px-4")}>Get My Offer</ButtonLink>
+            <Button variant="ghost" iconOnly leadingIcon={isMenuOpen ? RiCloseLine : RiMenu3Line} aria-label={isMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMenuOpen} aria-controls="mobile-navigation" popoverTarget="mobile-navigation" className="size-11 shrink-0 rounded-full text-accent-950 md:hidden" />
+          </div>
         </div>
         <nav id="mobile-navigation" popover="auto" onToggle={(event) => setIsMenuOpen(event.newState === "open")} aria-label="Mobile navigation" className="genesis-mobile-nav rounded-3xl border border-border-button-default bg-background-secondary-default/95 p-4 text-body-medium text-accent-950 backdrop-blur-2xl md:hidden">
           <div className="flex flex-col gap-1">
