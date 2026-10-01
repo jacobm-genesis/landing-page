@@ -40,10 +40,10 @@ function GenesisLogo() {
     <svg viewBox="0 0 1256 304" role="img" aria-label="Genesis Home Buyers LLC" className="h-10 w-40 shrink-0 sm:w-44">
       {/* Display the original artwork in two fitted windows; no mark or lettering is redrawn. */}
       <svg width="304" height="304" viewBox="320 180 620 600">
-        <image href="/genesis-logo-transparent.png" width="1254" height="1254" />
+        <image href="/genesis-logo-web.png" width="1254" height="1254" />
       </svg>
       <svg x="336" y="26" width="920" height="250" viewBox="120 780 1020 275">
-        <image href="/genesis-logo-transparent.png" width="1254" height="1254" />
+        <image href="/genesis-logo-web.png" width="1254" height="1254" />
       </svg>
     </svg>
   );
