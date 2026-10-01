@@ -3,13 +3,35 @@ import { Badge } from "@/components/base/badges/badge";
 import { ButtonLink } from "@/components/base/buttons/button";
 import { cx } from "@/utils/cx";
 
-// Typical costs of listing a $300,000 home; ranges, not quotes.
-const listingCosts = [
-  { label: "Agent commission (5–6%)", amount: "$15,000–$18,000" },
-  { label: "Repairs, cleanup & staging", amount: "$5,000–$25,000" },
-  { label: "Seller closing costs (title, doc stamps)", amount: "$4,000–$6,000" },
-  { label: "Holding costs while listed (mortgage, taxes, insurance, utilities)", amount: "$4,000–$8,000" },
-];
+// Same $300,000 home sold two ways. Listing costs are typical ranges; the offer range is Genesis's typical as-is offer.
+const payouts = {
+  traditional: {
+    eyebrow: "LIST WITH AN AGENT",
+    startLabel: "List price",
+    start: "$300,000",
+    lines: [
+      { label: "Agent commission", amount: "−$15k–$18k" },
+      { label: "Repairs & staging", amount: "−$5k–$25k" },
+      { label: "Closing costs", amount: "−$4k–$6k" },
+      { label: "Holding costs", amount: "−$4k–$8k" },
+    ],
+    net: "$243k–$272k",
+    when: "in 2–4 months — if the deal doesn’t fall through",
+  },
+  genesis: {
+    eyebrow: "SELL TO GENESIS",
+    startLabel: "Cash offer",
+    start: "$200k–$230k",
+    lines: [
+      { label: "Agent commission", amount: "$0" },
+      { label: "Repairs & staging", amount: "$0" },
+      { label: "Closing costs", amount: "$0 — we pay" },
+      { label: "Holding costs", amount: "$0" },
+    ],
+    net: "$200k–$230k",
+    when: "in as little as 7 days — cash, no financing risk",
+  },
+};
 
 const comparisonRows = [
   { traditional: "2–4 months to close", genesis: "Close in as little as 7 days" },
@@ -21,68 +43,70 @@ const comparisonRows = [
   { traditional: "Closing on the buyer’s schedule", genesis: "You pick your closing day" },
 ];
 
+function PayoutCard({ option }: { option: keyof typeof payouts }) {
+  const isGenesis = option === "genesis";
+  const { eyebrow, startLabel, start, lines, net, when } = payouts[option];
+  return (
+    <article aria-label={isGenesis ? "Selling to Genesis: what you walk away with" : "Listing with an agent: what you walk away with"} className={cx("flex flex-col rounded-3xl border p-6", isGenesis ? "border-accent-800 bg-accent-950 text-accent-50" : "border-border-button-default bg-background-primary-default")}>
+      <p className={cx("text-caption-1-semibold tracking-widest", isGenesis ? "text-accent-300" : "text-text-secondary")}>{eyebrow}</p>
+      <div className="mt-4 flex items-baseline justify-between gap-3">
+        <span className={cx("text-body-medium", isGenesis ? "text-accent-100" : "text-text-secondary")}>{startLabel}</span>
+        <span className={cx("text-headline-semibold", isGenesis ? "text-accent-50" : "text-text-primary")}>{start}</span>
+      </div>
+      <dl className={cx("mt-3 flex flex-col divide-y border-y", isGenesis ? "divide-accent-100/15 border-accent-100/15" : "divide-separator-border border-separator-border")}>
+        {lines.map(({ label, amount }) => (
+          <div key={label} className="flex items-baseline justify-between gap-3 py-2.5">
+            <dt className={cx("text-body-regular", isGenesis ? "text-accent-100" : "text-text-secondary")}>{label}</dt>
+            <dd className={cx("shrink-0 text-body-semibold", isGenesis ? "text-accent-300" : "text-text-error-primary")}>{amount}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className={cx("mt-5 text-body-medium", isGenesis ? "text-accent-100" : "text-text-secondary")}>You walk away with</p>
+      <p className={cx("text-title-1-bold", isGenesis ? "text-accent-300" : "text-text-error-primary")}>{net}</p>
+      <p className={cx("mt-1 text-body-regular", isGenesis ? "text-accent-100" : "text-text-secondary")}>{when}</p>
+    </article>
+  );
+}
+
+function ProcessCard({ option }: { option: "traditional" | "genesis" }) {
+  const isGenesis = option === "genesis";
+  const Icon = isGenesis ? RiCheckLine : RiCloseLine;
+  return (
+    <article aria-labelledby={`${option}-process-title`} className={cx("rounded-3xl border p-6", isGenesis ? "border-accent-200 bg-accent-50" : "border-border-button-default bg-background-primary-default")}>
+      <h3 id={`${option}-process-title`} className={cx("text-caption-1-semibold tracking-widest", isGenesis ? "text-accent-700" : "text-text-secondary")}>{isGenesis ? "THE GENESIS WAY" : "THE TRADITIONAL WAY"}</h3>
+      <ul className="mt-3 flex flex-col">
+        {comparisonRows.map((row) => (
+          <li key={row.genesis} className="flex items-center gap-3 py-2.5">
+            <span aria-hidden className={cx("flex size-6 shrink-0 items-center justify-center rounded-full", isGenesis ? "bg-accent-600 text-text-white" : "bg-background-tertiary-default text-text-error-primary")}><Icon className="size-4" /></span>
+            <span className={isGenesis ? "text-body-semibold text-accent-950" : "text-body-regular text-text-secondary"}>{row[option]}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+}
+
 export function Comparison2() {
   return (
     <section id="cash-offer-comparison" aria-labelledby="comparison-heading" className="scroll-mt-28 bg-background-secondary-default px-5 py-16 sm:px-8 lg:py-20">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
-          <Badge className="mb-4 rounded-full border border-accent-200 bg-accent-50 px-4 py-1.5 text-caption-1-semibold text-accent-800">WHAT LISTING REALLY COSTS</Badge>
+          <Badge className="mb-4 rounded-full border border-accent-200 bg-accent-50 px-4 py-1.5 text-caption-1-semibold text-accent-800">WHAT YOU ACTUALLY TAKE HOME</Badge>
           <h2 id="comparison-heading" className="text-balance text-display-4-bold text-accent-950 sm:text-display-3-bold">The list price isn’t what you take home</h2>
-          <p className="mt-4 text-headline-regular text-text-secondary">Most people call an agent first. Here’s what that path typically costs on a $300,000 Jacksonville home — before any price cuts or post-inspection repair requests.</p>
+          <p className="mt-4 text-headline-regular text-text-secondary">Same $300,000 Jacksonville house. Two ways to sell it.</p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:mt-12 lg:grid-cols-5">
-          <article aria-labelledby="listing-costs-title" className="flex flex-col rounded-3xl border border-border-button-default bg-background-primary-default p-6 sm:p-8 lg:col-span-2">
-            <p className="mb-3 text-caption-1-semibold tracking-widest text-text-secondary">THE TRADITIONAL ROUTE</p>
-            <h3 id="listing-costs-title" className="text-title-2-semibold text-text-primary">What comes out of your sale</h3>
-            <dl className="mt-6 flex flex-col divide-y divide-separator-border">
-              {listingCosts.map(({ label, amount }) => (
-                <div key={label} className="flex items-baseline justify-between gap-4 py-4">
-                  <dt className="text-body-regular text-text-secondary">{label}</dt>
-                  <dd className="shrink-0 text-right text-body-semibold text-text-error-primary">{amount}</dd>
-                </div>
-              ))}
-              <div className="flex items-baseline justify-between gap-4 pt-5">
-                <dt className="text-headline-semibold text-text-primary">Typical total</dt>
-                <dd className="shrink-0 text-right text-title-3-bold text-text-error-primary">$28,000–$57,000</dd>
-              </div>
-            </dl>
-            <p className="mt-2 text-body-regular text-text-secondary">Plus 2–4 months of your time — and the deal can still fall apart at the last minute.</p>
-            <p className="mt-auto pt-6 text-caption-1-regular text-text-tertiary">Typical ranges for illustration. Your actual costs depend on your home, price, and market.</p>
-          </article>
-
-          <div className="overflow-hidden rounded-3xl border border-border-button-default bg-background-primary-default lg:col-span-3">
-            <table className="h-full w-full table-fixed text-center">
-              <caption className="sr-only">Traditional listing compared with selling to Genesis Home Buyers</caption>
-              <thead className="bg-accent-950">
-                <tr>
-                  <th scope="col" className="px-4 py-5 text-caption-1-semibold tracking-widest text-accent-100">TRADITIONAL LISTING</th>
-                  <th scope="col" className="border-l border-accent-100/20 px-4 py-5 text-caption-1-semibold tracking-widest text-accent-300">SELLING TO GENESIS</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map(({ traditional, genesis }, index) => (
-                  <tr key={genesis} className={cx(index > 0 && "border-t border-separator-border")}>
-                    <td className="px-3 py-4 sm:px-5">
-                      <span className="inline-flex items-center gap-2 text-body-regular text-text-secondary">
-                        <RiCloseLine className="hidden size-4 shrink-0 text-text-tertiary sm:block" aria-hidden />{traditional}
-                      </span>
-                    </td>
-                    <td className="border-l border-accent-100 bg-accent-50 px-3 py-4 sm:px-5">
-                      <span className="inline-flex items-center gap-2 text-body-semibold text-accent-950">
-                        <RiCheckLine className="hidden size-4 shrink-0 text-accent-700 sm:block" aria-hidden />{genesis}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <div className="mt-10 grid gap-4 md:mt-12 md:grid-cols-2 xl:grid-cols-4">
+          <PayoutCard option="traditional" />
+          <ProcessCard option="traditional" />
+          <ProcessCard option="genesis" />
+          <PayoutCard option="genesis" />
         </div>
+        <p className="mt-4 text-center text-caption-1-regular text-text-tertiary">Typical ranges for illustration. Listing costs and our offer depend on your home’s condition, price, and market.</p>
 
-        <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-accent-200 bg-accent-50 p-6 sm:mt-10 sm:p-8">
-          <h3 className="text-title-3-semibold text-accent-950">Will our offer be lower than list price?</h3>
-          <p className="mt-2 text-headline-regular text-text-secondary">Usually, yes — and we’ll tell you that up front. But it’s a number you actually keep: no commissions, no closing costs, no repairs, no months of waiting, and a closing date you choose. Once you add up what listing really costs, the gap is often much smaller than it looks.</p>
+        <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-accent-200 bg-accent-50 p-6 text-center sm:mt-10 sm:p-8">
+          <h3 className="text-title-3-semibold text-accent-950">Our offer can be lower on paper. Here’s what the difference buys you.</h3>
+          <p className="mt-2 text-headline-regular text-text-secondary">Months of your life back. No showings, no repairs, no deal falling apart at the last minute — and cash in hand on the day you choose.</p>
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-4 text-center sm:mt-10">

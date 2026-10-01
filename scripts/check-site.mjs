@@ -42,8 +42,10 @@ assert.equal((processSection.match(/<li\b/g) || []).length, 3, 'The process must
 assert.match(processSection, /<a\b[^>]*href="#offer"[^>]*>/, 'Get Started must lead to the offer form');
 const comparison = html.match(/<section\b[^>]*id="cash-offer-comparison"[^>]*>[\s\S]*?<\/section>/)?.[0];
 assert.ok(comparison, 'The cash-offer comparison must render');
-assert.equal((comparison.match(/<tr\b/g) || []).length, 8, 'The comparison table must have a header and seven rows');
+assert.equal((comparison.match(/<li\b/g) || []).length, 14, 'Both process cards must have seven points');
 assert.match(comparison, /We pay closing costs/, 'The comparison must state that Genesis pays closing costs');
+assert.match(comparison, /\$243k–\$272k/, 'The traditional payout must show the net after costs');
+assert.match(comparison, /\$200k–\$230k/, 'The Genesis payout must show the typical offer range');
 assert.match(comparison, /<a\b[^>]*href="#offer"[^>]*>/, 'The comparison CTA must lead to the offer form');
 const theme = await readFile(new URL('../styles/theme.css', import.meta.url), 'utf8');
 for (const shade of [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]) {
