@@ -42,10 +42,11 @@ assert.equal((processSection.match(/<li\b/g) || []).length, 3, 'The process must
 assert.match(processSection, /<a\b[^>]*href="#offer"[^>]*>/, 'Get Started must lead to the offer form');
 const comparison = html.match(/<section\b[^>]*id="cash-offer-comparison"[^>]*>[\s\S]*?<\/section>/)?.[0];
 assert.ok(comparison, 'The cash-offer comparison must render');
-assert.equal((comparison.match(/<li\b/g) || []).length, 14, 'Both process cards must have seven points');
+assert.equal((comparison.match(/<li\b/g) || []).length, 22, 'Both process cards need eight points and the difference box six');
 assert.match(comparison, /We pay closing costs/, 'The comparison must state that Genesis pays closing costs');
-assert.match(comparison, /\$243k–\$272k/, 'The traditional payout must show the net after costs');
-assert.match(comparison, /\$200k–\$230k/, 'The Genesis payout must show the typical offer range');
+assert.match(comparison, /Prorated property taxes/, 'Listing costs must include prorated property taxes');
+assert.match(comparison, /\$242,900/, 'The traditional payout must show the net after costs');
+assert.match(comparison, /\$230,000/, 'The Genesis payout must show the example offer');
 assert.match(comparison, /<a\b[^>]*href="#offer"[^>]*>/, 'The comparison CTA must lead to the offer form');
 const theme = await readFile(new URL('../styles/theme.css', import.meta.url), 'utf8');
 for (const shade of [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]) {

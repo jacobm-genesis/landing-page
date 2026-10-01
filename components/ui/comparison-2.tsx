@@ -3,67 +3,68 @@ import { Badge } from "@/components/base/badges/badge";
 import { ButtonLink } from "@/components/base/buttons/button";
 import { cx } from "@/utils/cx";
 
-// Same $300,000 home sold two ways. Listing costs are typical ranges; the offer range is Genesis's typical as-is offer.
-const payouts = {
-  traditional: {
-    eyebrow: "LIST WITH AN AGENT",
-    startLabel: "List price",
-    start: "$300,000",
-    lines: [
-      { label: "Agent commission", amount: "−$15k–$18k" },
-      { label: "Repairs & staging", amount: "−$5k–$25k" },
-      { label: "Closing costs", amount: "−$4k–$6k" },
-      { label: "Holding costs", amount: "−$4k–$8k" },
-    ],
-    net: "$243k–$272k",
-    when: "in 2–4 months — if the deal doesn’t fall through",
-  },
-  genesis: {
-    eyebrow: "SELL TO GENESIS",
-    startLabel: "Cash offer",
-    start: "$200k–$230k",
-    lines: [
-      { label: "Agent commission", amount: "$0" },
-      { label: "Repairs & staging", amount: "$0" },
-      { label: "Closing costs", amount: "$0 — we pay" },
-      { label: "Holding costs", amount: "$0" },
-    ],
-    net: "$200k–$230k",
-    when: "in as little as 7 days — cash, no financing risk",
-  },
-};
+// One worked example: a $300,000 Jacksonville home that sells after 5 months on the market.
+// Costs are typical figures for that scenario; the offer is within Genesis's typical $200k–$230k range.
+const listPrice = 300_000;
+const monthsListed = 5;
+const genesisOffer = 230_000;
+
+const listingCosts = [
+  { label: "Agent commission (5.5%)", amount: 16_500 },
+  { label: "Repairs & prep to list", amount: 15_000 },
+  { label: "Price reductions (3%)", amount: 9_000 },
+  { label: "Seller closing costs", amount: 4_500 },
+  { label: `Mortgage interest (${monthsListed} mo)`, amount: 4_400 },
+  { label: `Insurance & utilities (${monthsListed} mo)`, amount: 2_500 },
+  { label: `Prorated property taxes (${monthsListed} mo)`, amount: 2_200 },
+  { label: "Inspection repair credits", amount: 3_000 },
+];
+
+const listingNet = listPrice - listingCosts.reduce((sum, { amount }) => sum + amount, 0);
+const difference = listingNet - genesisOffer;
+const usd = (value: number) => `$${value.toLocaleString("en-US")}`;
+const roundedDifference = `$${Math.round(difference / 1000)}k`;
 
 const comparisonRows = [
-  { traditional: "2–4 months to close", genesis: "Close in as little as 7 days" },
+  { traditional: `${monthsListed}+ months to sell and close`, genesis: "Close in as little as 7 days" },
   { traditional: "5–6% agent commission", genesis: "Zero fees or commissions" },
   { traditional: "You pay closing costs", genesis: "We pay closing costs" },
   { traditional: "Repairs before you list", genesis: "Sell completely as-is" },
+  { traditional: "Mortgage, taxes & bills every month", genesis: "No months of carrying costs" },
+  { traditional: "Price cut after price cut", genesis: "One clear cash offer" },
   { traditional: "Strangers touring your home", genesis: "No showings, ever" },
-  { traditional: "Buyer’s loan can fall through", genesis: "Cash — no financing risk" },
-  { traditional: "Closing on the buyer’s schedule", genesis: "You pick your closing day" },
+  { traditional: "Vacant home invites squatters", genesis: "Done before it sits empty" },
 ];
 
-function PayoutCard({ option }: { option: keyof typeof payouts }) {
+const differenceBuys = [
+  `${monthsListed} months of your life back`,
+  "No showings or open houses",
+  "No repairs, no price cuts",
+  "No mortgage, tax & utility bills while you wait",
+  "No squatter risk on a vacant house",
+  "Cash on the day you choose",
+];
+
+function PayoutCard({ option }: { option: "traditional" | "genesis" }) {
   const isGenesis = option === "genesis";
-  const { eyebrow, startLabel, start, lines, net, when } = payouts[option];
   return (
     <article aria-label={isGenesis ? "Selling to Genesis: what you walk away with" : "Listing with an agent: what you walk away with"} className={cx("flex flex-col rounded-3xl border p-6", isGenesis ? "border-accent-800 bg-accent-950 text-accent-50" : "border-border-button-default bg-background-primary-default")}>
-      <p className={cx("text-caption-1-semibold tracking-widest", isGenesis ? "text-accent-300" : "text-text-secondary")}>{eyebrow}</p>
+      <p className={cx("text-caption-1-semibold tracking-widest", isGenesis ? "text-accent-300" : "text-text-secondary")}>{isGenesis ? "SELL TO GENESIS" : "LIST WITH AN AGENT"}</p>
       <div className="mt-4 flex items-baseline justify-between gap-3">
-        <span className={cx("text-body-medium", isGenesis ? "text-accent-100" : "text-text-secondary")}>{startLabel}</span>
-        <span className={cx("text-headline-semibold", isGenesis ? "text-accent-50" : "text-text-primary")}>{start}</span>
+        <span className={cx("text-body-medium", isGenesis ? "text-accent-100" : "text-text-secondary")}>{isGenesis ? "Cash offer" : "List price"}</span>
+        <span className={cx("text-headline-semibold", isGenesis ? "text-accent-50" : "text-text-primary")}>{usd(isGenesis ? genesisOffer : listPrice)}</span>
       </div>
       <dl className={cx("mt-3 flex flex-col divide-y border-y", isGenesis ? "divide-accent-100/15 border-accent-100/15" : "divide-separator-border border-separator-border")}>
-        {lines.map(({ label, amount }) => (
-          <div key={label} className="flex items-baseline justify-between gap-3 py-2.5">
-            <dt className={cx("text-body-regular", isGenesis ? "text-accent-100" : "text-text-secondary")}>{label}</dt>
-            <dd className={cx("shrink-0 text-body-semibold", isGenesis ? "text-accent-300" : "text-text-error-primary")}>{amount}</dd>
+        {listingCosts.map(({ label, amount }) => (
+          <div key={label} className="flex items-baseline justify-between gap-3 py-2">
+            <dt className={cx("text-body-regular", isGenesis ? "text-accent-100" : "text-text-secondary")}>{isGenesis ? label.replace(/ \(.*\)$/, "") : label}</dt>
+            <dd className={cx("shrink-0 text-body-semibold", isGenesis ? "text-accent-300" : "text-text-error-primary")}>{isGenesis ? "$0" : `−${usd(amount)}`}</dd>
           </div>
         ))}
       </dl>
       <p className={cx("mt-5 text-body-medium", isGenesis ? "text-accent-100" : "text-text-secondary")}>You walk away with</p>
-      <p className={cx("text-title-1-bold", isGenesis ? "text-accent-300" : "text-text-error-primary")}>{net}</p>
-      <p className={cx("mt-1 text-body-regular", isGenesis ? "text-accent-100" : "text-text-secondary")}>{when}</p>
+      <p className={cx("text-title-1-bold", isGenesis ? "text-accent-300" : "text-text-error-primary")}>{usd(isGenesis ? genesisOffer : listingNet)}</p>
+      <p className={cx("mt-1 text-body-regular", isGenesis ? "text-accent-100" : "text-text-secondary")}>{isGenesis ? "in as little as 7 days" : `after ${monthsListed}+ months — if the deal doesn’t fall through`}</p>
     </article>
   );
 }
@@ -102,12 +103,19 @@ export function Comparison2() {
           <ProcessCard option="genesis" />
           <PayoutCard option="genesis" />
         </div>
-        <p className="mt-4 text-center text-caption-1-regular text-text-tertiary">Typical ranges for illustration. Listing costs and our offer depend on your home’s condition, price, and market.</p>
 
-        <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-accent-200 bg-accent-50 p-6 text-center sm:mt-10 sm:p-8">
-          <h3 className="text-title-3-semibold text-accent-950">Our offer can be lower on paper. Here’s what the difference buys you.</h3>
-          <p className="mt-2 text-headline-regular text-text-secondary">Months of your life back. No showings, no repairs, no deal falling apart at the last minute — and cash in hand on the day you choose.</p>
+        <div className="mx-auto mt-8 max-w-4xl rounded-3xl border border-accent-200 bg-accent-50 p-6 text-center sm:mt-10 sm:p-8">
+          <p className="text-caption-1-semibold tracking-widest text-accent-700">THE REAL DIFFERENCE</p>
+          <h3 className="mt-2 text-title-1-bold text-accent-950">About {roundedDifference}. Here’s what it buys you.</h3>
+          <ul className="mt-5 flex flex-wrap justify-center gap-2">
+            {differenceBuys.map((item) => (
+              <li key={item} className="flex items-center gap-2 rounded-full border border-accent-200 bg-background-primary-default px-4 py-2 text-body-medium text-accent-950">
+                <RiCheckLine className="size-4 shrink-0 text-accent-600" aria-hidden />{item}
+              </li>
+            ))}
+          </ul>
         </div>
+        <p className="mx-auto mt-4 max-w-3xl text-center text-caption-1-regular text-text-tertiary">Example for a {usd(listPrice)} home that sells after {monthsListed} months. Typical costs shown; your actual costs and our offer depend on your home’s condition, price, and market.</p>
 
         <div className="mt-8 flex flex-col items-center gap-4 text-center sm:mt-10">
           <ButtonLink href="#offer" trailingIcon={RiArrowRightLine} className="h-12 rounded-full px-6 text-body-semibold">See What We’d Offer</ButtonLink>
