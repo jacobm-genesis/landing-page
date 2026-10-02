@@ -13,14 +13,17 @@ import { Checkbox } from "@/components/base/checkbox/checkbox";
 import { Divider } from "@/components/base/divider/divider";
 import { Input } from "@/components/base/input/input";
 import { Comparison2 } from "@/components/ui/comparison-2";
+import { Faq } from "@/components/ui/faq";
 import { contact } from "@/components/ui/legal-page";
 import OnboardingBlock from "@/components/ui/onboarding-setup-steps";
+import { Reviews } from "@/components/ui/reviews";
 import { cx } from "@/utils/cx";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Why Us", href: "#why-us" },
   { label: "Our Team", href: "#our-team" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 const teamMembers = [
@@ -230,6 +233,7 @@ export default function Home() {
           </div>
         </section>
         <Comparison2 />
+        <Reviews />
         <section id="our-team" aria-labelledby="team-heading" className="scroll-mt-28 px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-6xl">
             <div className="text-center">
@@ -248,6 +252,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <Faq />
         <section aria-labelledby="cta-heading" className="closing-cta relative mx-3 mb-12 overflow-hidden rounded-3xl border border-border-button-default bg-accent-950 px-6 py-12 text-text-white sm:mx-5 sm:px-10 lg:py-16">
           <div className="relative mx-auto flex max-w-6xl flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div className="max-w-2xl">
@@ -274,6 +279,7 @@ export default function Home() {
           <a href="/privacy" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</a>
           <a href="/terms" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</a>
           <a href="/text-us" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Text Us</a>
+          <a href="/jv" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Wholesalers: Submit a Deal</a>
         </div>
       </footer>
     </>

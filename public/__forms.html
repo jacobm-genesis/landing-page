@@ -17,5 +17,22 @@
       <input name="sms_consent_transactional" type="checkbox" value="yes" />
       <input name="sms_consent_marketing" type="checkbox" value="yes" />
     </form>
+    <!-- Wholesaler JV deal submissions from app/jv/page.tsx; keep in sync with components/ui/jv-deal-form.tsx. -->
+    <form name="jv-deal" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="jv-deal" />
+      <input name="bot-field" type="text" />
+      <input name="name" type="text" required />
+      <input name="phone" type="tel" required />
+      <input name="email" type="email" required />
+      <input name="property_address" type="text" required />
+      <input name="deal_type" type="text" />
+      <input name="contract_price" type="text" required />
+      <input name="asking_price" type="text" />
+      <input name="arv" type="text" />
+      <input name="repairs" type="text" />
+      <input name="contract_close_date" type="text" required />
+      <input name="photos_link" type="text" />
+      <input name="notes" type="text" />
+    </form>
   </body>
 </html>

@@ -30,7 +30,7 @@ for (const [name, type, autocomplete] of [
   assert.ok(staticForm.includes(`name="${name}"`), `Netlify must capture ${name}`);
 }
 assert.match(form, /name="form-name" value="offer"/);
-for (const id of ['offer', 'how-it-works', 'why-us', 'our-team']) {
+for (const id of ['offer', 'how-it-works', 'why-us', 'our-team', 'faq']) {
   assert.ok(html.includes(`id="${id}"`), `Missing anchor ${id}`);
   assert.ok(html.includes(`href="#${id}"`), `Missing navigation to ${id}`);
 }
