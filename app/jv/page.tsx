@@ -34,7 +34,7 @@ export default function JvPage() {
       <main className="bg-background-full">
         <section className="bg-accent-950 px-5 pb-16 pt-12 text-text-white sm:px-8 lg:pb-20 lg:pt-16">
           <div className="mx-auto max-w-6xl">
-            <Link href="/" className="inline-flex items-center gap-2 rounded-md text-body-medium text-accent-200 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
+            <Link href="/" className="-my-2 inline-flex items-center gap-2 rounded-md py-2 text-body-medium text-accent-200 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
               <RiArrowLeftLine className="size-4" aria-hidden />
               Back to home
             </Link>

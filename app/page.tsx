@@ -128,7 +128,7 @@ export default function Home() {
         </nav>
       </header>
       <main id="main">
-        <section className="genesis-hero relative flex min-h-svh w-full items-center bg-accent-950 text-text-white" aria-labelledby="hero-heading">
+        <section className="genesis-hero relative flex min-h-svh w-full items-center overflow-x-clip bg-accent-950 text-text-white" aria-labelledby="hero-heading">
           <video className="genesis-hero-video" src="/hero.mp4" poster="/hero.jpg" autoPlay muted loop playsInline aria-hidden />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-20 pt-32 sm:px-8 sm:pt-36 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-28 xl:px-10">
             <div className="hero-copy min-w-0 lg:col-span-7">
@@ -277,10 +277,10 @@ export default function Home() {
         </address>
         <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
           <p>© 2026 Genesis Home Buyers LLC.</p>
-          <a href="/privacy" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</a>
-          <a href="/terms" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</a>
-          <a href="/text-us" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Text Us</a>
-          <a href="/jv" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Submit a Deal – JV</a>
+          <a href="/privacy" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</a>
+          <a href="/terms" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</a>
+          <a href="/text-us" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Text Us</a>
+          <a href="/jv" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Submit a Deal – JV</a>
         </div>
       </footer>
     </>

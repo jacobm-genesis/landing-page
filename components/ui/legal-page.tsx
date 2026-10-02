@@ -28,7 +28,7 @@ export function LegalPage({ title, effectiveDate, intro, sections }: { title: st
   return (
     <main className="min-h-screen bg-background-full px-5 py-12 sm:px-8 lg:py-16">
       <article className="mx-auto max-w-3xl">
-        <Link href="/" className="inline-flex items-center gap-2 rounded-md text-body-medium text-accent-700 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
+        <Link href="/" className="-my-2 inline-flex items-center gap-2 rounded-md py-2 text-body-medium text-accent-700 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
           <RiArrowLeftLine className="size-4" aria-hidden />
           Back to home
         </Link>
@@ -46,9 +46,9 @@ export function LegalPage({ title, effectiveDate, intro, sections }: { title: st
             </section>
           ))}
         </div>
-        <nav aria-label="Legal" className="flex gap-4 border-t border-separator-border pt-6 text-body-medium">
-          <Link href="/privacy" className="rounded-md text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</Link>
-          <Link href="/terms" className="rounded-md text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</Link>
+        <nav aria-label="Legal" className="flex gap-4 border-t border-separator-border pt-4 text-body-medium">
+          <Link href="/privacy" className="rounded-md py-2 text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</Link>
+          <Link href="/terms" className="rounded-md py-2 text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</Link>
         </nav>
       </article>
     </main>

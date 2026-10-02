@@ -18,7 +18,7 @@ export default function TextUs() {
     <>
       <main className="bg-background-full px-5 pt-12 sm:px-8 lg:pt-16">
         <div className="mx-auto max-w-3xl">
-          <Link href="/" className="inline-flex items-center gap-2 rounded-md text-body-medium text-accent-700 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
+          <Link href="/" className="-my-2 inline-flex items-center gap-2 rounded-md py-2 text-body-medium text-accent-700 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
             <RiArrowLeftLine className="size-4" aria-hidden />
             Back to home
           </Link>
