@@ -7,7 +7,7 @@ const faqs = [
   { question: "How fast can you close?", answer: "In as little as 7 days. If you need more time, you pick the closing date that works for you.", confirmed: true },
   { question: "Do I need to make repairs or clean the house?", answer: "No. We buy houses as-is, in any condition. Take what you want to keep and leave the rest behind.", confirmed: true },
   { question: "What if I’m behind on payments or facing foreclosure?", answer: "We can help. We work with homeowners facing foreclosure, divorce, relocation, or an inherited property. Any remaining mortgage is paid off from the sale at closing.", confirmed: true },
-  { question: "Are you real estate agents?", answer: "No. We’re a local Jacksonville home-buying company, not a listing agent. We make you a direct cash offer, so there’s no listing, no showings, and no commission.", confirmed: false },
+  { question: "Are we real estate agents?", answer: "No. We’re a local Jacksonville home-buying company, not a listing agent. We make you a direct cash offer, so there’s no listing, no showings, and no commission.", confirmed: false },
   { question: "How do you come up with your offer?", answer: "We look at your home’s condition, the repairs it needs, and what similar homes nearby have recently sold for. Then we walk you through the number so you can see how we got there.", confirmed: false },
   { question: "Who handles the closing?", answer: "A licensed local title company handles the closing, so your sale and your money are handled securely and by the book.", confirmed: false },
   { question: "Do you buy houses with tenants living in them?", answer: "Yes. We can buy rental properties with tenants still in place.", confirmed: false },
