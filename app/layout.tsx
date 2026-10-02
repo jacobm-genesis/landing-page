@@ -6,7 +6,7 @@ import { cx } from "@/utils/cx";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 
-const siteUrl = "https://genesis-home-buyers-llc.netlify.app";
+const siteUrl = "https://genesishomebuyers.co";
 const title = "Sell Your House Fast for Cash in Jacksonville, FL | Genesis Home Buyers LLC";
 const description = "Sell your Jacksonville house as-is to Genesis Home Buyers LLC. Get a fair cash offer within 24 hours, pay no fees or commissions, and close in as little as 7 days.";
 

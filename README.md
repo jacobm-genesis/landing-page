@@ -2,11 +2,11 @@
 
 Single-page lead-generation site built with Next.js App Router, TypeScript, Tailwind CSS v4, and free BoardUI components.
 
-Live: https://genesis-home-buyers-llc.netlify.app
+Live: https://genesishomebuyers.co
 
-Hosted in Duval Software. [Netlify project](https://app.netlify.com/projects/genesis-home-buyers-llc).
+Hosted in the Genesis Home Buyers Netlify team (project `genesishomebuyers.co`), deployed automatically from `main`.
 
-Source: [Duval-Software/genesis-home-buyers-llc](https://github.com/Duval-Software/genesis-home-buyers-llc) (private).
+Source: [jacobm-genesis/landing-page](https://github.com/jacobm-genesis/landing-page). The old `genesis-home-buyers-llc.netlify.app` project and `Duval-Software/genesis-home-buyers-llc` repo are no longer used.
 
 ## Run locally
 
@@ -37,14 +37,14 @@ Form detection is enabled and Netlify has detected the `offer` form with all fou
 
 ## Deploy to Netlify
 
-`next.config.ts` enables static export; `netlify.toml` publishes `out/`. To publish updates using the authenticated Netlify CLI:
+`next.config.ts` enables static export; `netlify.toml` publishes `out/`. Netlify builds and publishes every push to `main`. Before pushing:
 
 ```sh
 npm run lint
 npm run build
-npx --yes netlify-cli deploy --site 6d815f86-b3c5-486f-9a71-c9924fce6722 --dir out --no-build --prod --json
-npm run check -- https://genesis-home-buyers-llc.netlify.app
 ```
+
+After the deploy finishes, verify the live site with `npm run check -- https://genesishomebuyers.co`.
 
 This is a direct production deployment; Git-triggered automatic deployments are not configured.
 
