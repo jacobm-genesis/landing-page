@@ -67,9 +67,12 @@ export default function Home() {
   // Local preview only: open /?preview=details to see the optional details step without submitting a lead.
   useEffect(() => {
     if (process.env.NODE_ENV !== "development" || new URLSearchParams(window.location.search).get("preview") !== "details") return;
-    setOfferContact({ name: "Preview Seller", email: "preview@example.com", phone: "9045550123", address: "1563 W 1st St, Jacksonville, FL 32209" });
-    setSubmission("success");
-    document.getElementById("offer")?.scrollIntoView({ block: "start" });
+    const frame = requestAnimationFrame(() => {
+      setOfferContact({ name: "Preview Seller", email: "preview@example.com", phone: "9045550123", address: "1563 W 1st St, Jacksonville, FL 32209" });
+      setSubmission("success");
+      document.getElementById("offer")?.scrollIntoView({ block: "start" });
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
