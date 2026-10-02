@@ -30,6 +30,18 @@
       <input name="landing_page" type="hidden" />
       <input name="referrer" type="hidden" />
     </form>
+    <!-- Optional second step after an offer request; keep in sync with components/ui/offer-details-form.tsx. -->
+    <form name="offer-details" method="POST" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="offer-details" />
+      <input name="name" type="hidden" />
+      <input name="email" type="hidden" />
+      <input name="phone" type="hidden" />
+      <input name="address" type="hidden" />
+      <input name="condition" type="radio" value="" />
+      <input name="timeline" type="radio" value="" />
+      <input name="occupancy" type="radio" value="" />
+      <input name="details_notes" type="text" />
+    </form>
     <!-- Wholesaler JV deal submissions from app/jv/page.tsx; keep in sync with components/ui/jv-deal-form.tsx. -->
     <form name="jv-deal" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="jv-deal" />

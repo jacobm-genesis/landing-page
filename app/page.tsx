@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/base/checkbox/checkbox";
 import { Divider } from "@/components/base/divider/divider";
 import { Input } from "@/components/base/input/input";
 import { AddressAutocomplete } from "@/components/ui/address-autocomplete";
+import { OfferDetailsForm, type OfferContact } from "@/components/ui/offer-details-form";
 import { Comparison2 } from "@/components/ui/comparison-2";
 import { Faq } from "@/components/ui/faq";
 import { contact } from "@/components/ui/legal-page";
@@ -56,6 +57,7 @@ function GenesisLogo() {
 
 export default function Home() {
   const [submission, setSubmission] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [offerContact, setOfferContact] = useState<OfferContact>({ name: "", email: "", phone: "", address: "" });
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -94,6 +96,8 @@ export default function Home() {
         body: body.toString(),
       });
       if (!response.ok) throw new Error("Offer request was not accepted");
+      const data = new FormData(form);
+      setOfferContact({ name: String(data.get("name") ?? ""), email: String(data.get("email") ?? ""), phone: String(data.get("phone") ?? ""), address: String(data.get("address") ?? "") });
       setSubmission("success");
       trackOfferLead();
       form.reset();
@@ -174,11 +178,7 @@ export default function Home() {
                   <p className="mt-2 text-body-regular text-text-secondary">No pressure. No obligation. Just a fresh start.</p>
                 </div>
                 {submission === "success" ? (
-                  <div role="status" className="flex min-h-80 flex-col items-center justify-center gap-4 text-center">
-                    <RiShieldCheckLine className="size-12 text-accent-600" aria-hidden />
-                    <h3 className="text-title-2-semibold">Your request is in.</h3>
-                    <p className="text-headline-regular text-text-secondary">Thank you for reaching out. The Genesis team will contact you to learn more about your property.</p>
-                  </div>
+                  <OfferDetailsForm contact={offerContact} />
                 ) : (
                   <form name="offer" method="POST" action="/__forms.html" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={submitOffer} className="flex flex-col gap-4 lg:gap-3" aria-busy={submission === "sending"}>
                     <input type="hidden" name="form-name" value="offer" />
