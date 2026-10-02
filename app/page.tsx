@@ -17,6 +17,7 @@ import { Faq } from "@/components/ui/faq";
 import { contact } from "@/components/ui/legal-page";
 import OnboardingBlock from "@/components/ui/onboarding-setup-steps";import { cx } from "@/utils/cx";
 import { trackOfferLead } from "@/utils/google-ads";
+import { captureLeadSource, leadSourceFields } from "@/utils/lead-source";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -58,6 +59,8 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  useEffect(captureLeadSource, []);
+
   useEffect(() => {
     const updateNavigation = () => {
       setIsScrolled(window.scrollY > 320);
@@ -83,6 +86,7 @@ export default function Home() {
     try {
       const body = new URLSearchParams();
       new FormData(form).forEach((value, key) => body.append(key, String(value)));
+      Object.entries(leadSourceFields()).forEach(([key, value]) => body.append(key, value));
       const response = await fetch(form.action, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },

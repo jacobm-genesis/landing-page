@@ -1,15 +1,18 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { RiArrowRightLine, RiMapPinLine, RiShieldCheckLine } from "@remixicon/react";
 import { Button } from "@/components/base/buttons/button";
 import { Input } from "@/components/base/input/input";
+import { captureLeadSource, leadSourceFields } from "@/utils/lead-source";
 
 // Field names must stay in sync with the "jv-deal" definition in public/__forms.html.
 const field = { validationBehavior: "native" as const, fieldClassName: "offer-field", inputClassName: "text-headline-regular" };
 
 export function JvDealForm() {
   const [submission, setSubmission] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  useEffect(captureLeadSource, []);
 
   async function submitDeal(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -18,6 +21,7 @@ export function JvDealForm() {
     try {
       const body = new URLSearchParams();
       new FormData(form).forEach((value, key) => body.append(key, String(value)));
+      Object.entries(leadSourceFields()).forEach(([key, value]) => body.append(key, value));
       const response = await fetch(form.action, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
