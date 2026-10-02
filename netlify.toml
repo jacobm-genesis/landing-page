@@ -1,3 +1,9 @@
 [build]
   command = "npm run build"
   publish = "out"
+
+# The Google Maps browser key in utils/google-places.ts is public by design (it ships in client code and is
+# restricted to genesishomebuyers.co and the Places + Maps JS APIs in Google Cloud), so Netlify's secrets
+# scanner may ignore that one value while still scanning for real secrets.
+[build.environment]
+  SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "AIzaSyA3uBP0Lb4W3r9ereQ1IuQSk2yadQ2Cx98"
