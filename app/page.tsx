@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/base/checkbox/checkbox";
 import { Divider } from "@/components/base/divider/divider";
 import { Input } from "@/components/base/input/input";
 import { AddressAutocomplete } from "@/components/ui/address-autocomplete";
-import { OfferDetailsForm, type OfferContact } from "@/components/ui/offer-details-form";
+import { OfferDetailsForm, zillowLink, type OfferContact } from "@/components/ui/offer-details-form";
 import { Comparison2 } from "@/components/ui/comparison-2";
 import { Faq } from "@/components/ui/faq";
 import { contact } from "@/components/ui/legal-page";
@@ -90,6 +90,7 @@ export default function Home() {
       const body = new URLSearchParams();
       new FormData(form).forEach((value, key) => body.append(key, String(value)));
       Object.entries(leadSourceFields()).forEach(([key, value]) => body.append(key, value));
+      body.append("zillow_link", zillowLink(String(new FormData(form).get("address") ?? "")));
       const response = await fetch(form.action, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },

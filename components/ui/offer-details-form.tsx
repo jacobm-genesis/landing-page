@@ -7,14 +7,21 @@ import { Button } from "@/components/base/buttons/button";
 import { Input } from "@/components/base/input/input";
 import { cx } from "@/utils/cx";
 
+/** Zillow search link for an address, so agents can see beds, baths, square footage and year built. */
+export function zillowLink(address: string) {
+  const slug = address.trim().replace(/\s+/g, "-");
+  return slug ? `https://www.zillow.com/homes/${encodeURI(slug)}_rb/` : "";
+}
+
 /** Contact details from the main offer form, sent again so the CRM can match the existing contact. */
 export type OfferContact = { name: string; email: string; phone: string; address: string };
 
 // Field names must stay in sync with the "offer-details" definition in public/__forms.html.
 const questions = [
+  { name: "reason", label: "Why are you selling?", options: ["Inherited", "Relocating", "Behind on payments", "Divorce", "Tired landlord", "Downsizing", "Other"] },
+  { name: "timeline", label: "When do you want to sell?", options: ["ASAP", "Within 30 days", "1–3 months", "3+ months", "Just exploring"] },
   { name: "condition", label: "Property condition", options: ["Move-in ready", "Needs some work", "Needs major repairs"] },
-  { name: "timeline", label: "When do you want to sell?", options: ["ASAP", "Within 30 days", "1–3 months", "Just exploring"] },
-  { name: "occupancy", label: "Who lives there now?", options: ["I do", "Tenant", "Vacant"] },
+  { name: "occupancy", label: "Who lives there now?", options: ["I do", "Tenant", "Family member", "Vacant"] },
 ];
 
 const field = { fieldClassName: "offer-field", inputClassName: "text-headline-regular" };
@@ -58,6 +65,7 @@ export function OfferDetailsForm({ contact }: { contact: OfferContact }) {
       </div>
       <input type="hidden" name="form-name" value="offer-details" />
       {Object.entries(contact).map(([key, value]) => <input key={key} type="hidden" name={key} value={value} />)}
+      <input type="hidden" name="zillow_link" value={zillowLink(contact.address)} />
 
       {questions.map(({ name, label, options }) => (
         <RadioGroup key={name} name={name} className="flex flex-col gap-2">
@@ -80,7 +88,9 @@ export function OfferDetailsForm({ contact }: { contact: OfferContact }) {
         </RadioGroup>
       ))}
 
-      <Input label="Anything else we should know?" name="details_notes" placeholder="Roof leak, inherited, behind on payments…" {...field} />
+      <Input label="What repairs are needed? (briefly)" name="repairs" placeholder="Roof, AC, foundation, cosmetic…" {...field} />
+      <Input label="Price you’re hoping for (optional)" name="asking_price" inputMode="numeric" placeholder="$200,000" {...field} />
+      <Input label="Anything else we should know?" name="details_notes" placeholder="Liens, code violations, deadline…" {...field} />
 
       <div className="flex flex-col gap-2">
         <Button type="submit" trailingIcon={RiArrowRightLine} disabled={status === "sending"} className="h-12 w-full rounded-xl text-headline-semibold">{status === "sending" ? "Sending…" : "Send Details"}</Button>
