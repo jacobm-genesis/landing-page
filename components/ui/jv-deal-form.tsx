@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { RiArrowRightLine, RiMapPinLine, RiShieldCheckLine } from "@remixicon/react";
+import { RiArrowRightLine, RiShieldCheckLine } from "@remixicon/react";
 import { Button } from "@/components/base/buttons/button";
 import { Input } from "@/components/base/input/input";
 import { captureLeadSource, leadSourceFields } from "@/utils/lead-source";
+import { AddressAutocomplete } from "@/components/ui/address-autocomplete";
 
 // Field names must stay in sync with the "jv-deal" definition in public/__forms.html.
 const field = { validationBehavior: "native" as const, fieldClassName: "offer-field", inputClassName: "text-headline-regular" };
@@ -59,7 +60,7 @@ export function JvDealForm() {
       <Input label="Email" name="email" type="email" autoComplete="email" placeholder="you@example.com" isRequired {...field} />
 
       <p className="mt-4 text-caption-1-semibold tracking-widest text-accent-700">THE DEAL</p>
-      <Input label="Property Address" name="property_address" placeholder="Street address, city, state, ZIP" leadingIcon={RiMapPinLine} isRequired {...field} />
+      <AddressAutocomplete name="property_address" />
       <Input label="Deal Type" name="deal_type" placeholder="Cash, subject-to, seller finance, land, multifamily…" {...field} />
       <div className="grid gap-4 sm:grid-cols-2">
         <Input label="Contract Price" name="contract_price" inputMode="numeric" placeholder="$150,000" isRequired {...field} />
