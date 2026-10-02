@@ -5,10 +5,10 @@ import "@/styles/globals.css";
 import { company, contact } from "@/components/ui/legal-page";
 import { cx } from "@/utils/cx";
 import { googleAdsId } from "@/utils/google-ads";
+import { siteUrl } from "@/utils/site";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 
-const siteUrl = "https://genesishomebuyers.co";
 const title = "Sell Your House Fast for Cash in Jacksonville, FL | Genesis Home Buyers LLC";
 const description = "Sell your Jacksonville house as-is to Genesis Home Buyers LLC. Get a fair cash offer within 24 hours, pay no fees or commissions, and close in as little as 7 days.";
 
@@ -32,7 +32,11 @@ const businessJsonLd = {
   telephone: contact.phoneHref.replace("tel:", ""),
   email: contact.email,
   address: { "@type": "PostalAddress", streetAddress: "9507 Egrets Landing Dr", addressLocality: "Jacksonville", addressRegion: "FL", postalCode: "32257", addressCountry: "US" },
-  areaServed: { "@type": "City", name: "Jacksonville, FL" },
+  areaServed: [
+    { "@type": "City", name: "Jacksonville, FL" },
+    { "@type": "City", name: "Pensacola, FL" },
+    { "@type": "State", name: "Florida" },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
