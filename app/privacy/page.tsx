@@ -71,7 +71,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>Our website uses cookies and similar technologies (small files or code stored in your browser) to operate the site, keep it secure, and remember basic preferences. Our website host may also log technical information such as your IP address, browser type, and pages visited.</p>
-        <p>We may use analytics and advertising tools, such as Google Analytics or the Meta Pixel, to understand how visitors use our site and to measure our advertising. These tools may set their own cookies and collect information about your visit, subject to their own privacy policies. We do not use cookies to collect SMS opt-in data or share it with third parties.</p>
+        <p>We may use analytics and advertising tools, such as Google Ads, Google Analytics, or the Meta Pixel, to understand how visitors use our site and to measure our advertising. These tools may set their own cookies and collect information about your visit, subject to their own privacy policies. We do not use cookies to collect SMS opt-in data or share it with third parties.</p>
         <p>You can block or delete cookies through your browser settings. Some parts of the site may not work properly if you do.</p>
       </>
     ),

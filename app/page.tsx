@@ -16,6 +16,7 @@ import { Comparison2 } from "@/components/ui/comparison-2";
 import { Faq } from "@/components/ui/faq";
 import { contact } from "@/components/ui/legal-page";
 import OnboardingBlock from "@/components/ui/onboarding-setup-steps";import { cx } from "@/utils/cx";
+import { trackOfferLead } from "@/utils/google-ads";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -89,6 +90,7 @@ export default function Home() {
       });
       if (!response.ok) throw new Error("Offer request was not accepted");
       setSubmission("success");
+      trackOfferLead();
       form.reset();
     } catch {
       setSubmission("error");
