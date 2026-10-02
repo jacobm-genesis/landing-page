@@ -927,7 +927,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .genesis-floating-nav[data-scrolled="true"] {
-  max-width: 48.75rem;
+  max-width: 54rem;
 }
 
 .genesis-mobile-nav {

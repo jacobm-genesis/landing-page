@@ -111,8 +111,8 @@ export default function Home() {
             ))}
           </nav>
           <div className="flex shrink-0 items-center gap-1 md:gap-2">
-            <ButtonLink href={contact.phoneHref} variant="ghost" iconOnly leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className="size-11 shrink-0 rounded-full text-accent-950 md:size-10 xl:hidden" />
-            <ButtonLink href={contact.phoneHref} variant="ghost" leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className="hidden h-10 shrink-0 rounded-full px-3 text-accent-950 xl:inline-flex">{contact.phone}</ButtonLink>
+            <ButtonLink href={contact.phoneHref} variant="ghost" iconOnly leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className={cx("size-11 shrink-0 rounded-full text-accent-950 md:size-10", !isScrolled && "xl:hidden")} />
+            <ButtonLink href={contact.phoneHref} variant="ghost" leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className={cx("hidden h-10 shrink-0 rounded-full px-3 text-accent-950", !isScrolled && "xl:inline-flex")}>{contact.phone}</ButtonLink>
             <ButtonLink href="#offer" aria-label="Get My Offer" iconOnly={isScrolled} leadingIcon={isScrolled ? RiArrowRightUpLine : undefined} trailingIcon={!isScrolled ? RiArrowRightUpLine : undefined} className={cx("hidden h-10 shrink-0 rounded-full md:inline-flex", isScrolled ? "w-10 p-0" : "px-4")}>Get My Offer</ButtonLink>
             <Button variant="ghost" iconOnly leadingIcon={isMenuOpen ? RiCloseLine : RiMenu3Line} aria-label={isMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMenuOpen} aria-controls="mobile-navigation" popoverTarget="mobile-navigation" className="size-11 shrink-0 rounded-full text-accent-950 lg:hidden" />
           </div>
