@@ -15,15 +15,14 @@ import { Input } from "@/components/base/input/input";
 import { Comparison2 } from "@/components/ui/comparison-2";
 import { Faq } from "@/components/ui/faq";
 import { contact } from "@/components/ui/legal-page";
-import OnboardingBlock from "@/components/ui/onboarding-setup-steps";
-import { Reviews } from "@/components/ui/reviews";
-import { cx } from "@/utils/cx";
+import OnboardingBlock from "@/components/ui/onboarding-setup-steps";import { cx } from "@/utils/cx";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Why Us", href: "#why-us" },
   { label: "Our Team", href: "#our-team" },
   { label: "FAQ", href: "#faq" },
+  { label: "Wholesalers", href: "/jv" },
 ];
 
 const teamMembers = [
@@ -62,7 +61,7 @@ export default function Home() {
     const updateNavigation = () => {
       setIsScrolled(window.scrollY > 320);
       const current = navLinks.findLast(({ href }) => {
-        const section = document.querySelector(href);
+        const section = href.startsWith("#") && document.querySelector(href);
         return section && section.getBoundingClientRect().top <= 128;
       });
       setActiveSection(current?.href ?? "");
@@ -104,19 +103,19 @@ export default function Home() {
           <a href="#" onClick={closeMenu} aria-label="Genesis Home Buyers LLC home" className="flex shrink-0 items-center rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
             <GenesisLogo />
           </a>
-          <nav aria-label="Main navigation" className="hidden min-w-0 flex-1 items-center justify-center gap-2 text-body-medium md:flex">
+          <nav aria-label="Main navigation" className="hidden min-w-0 flex-1 items-center justify-center gap-2 text-body-medium lg:flex">
             {navLinks.map(({ label, href }) => (
               <a key={href} href={href} aria-current={activeSection === href ? "location" : undefined} className={cx("nav-link whitespace-nowrap px-2 py-2", activeSection === href ? "bg-accent-100/70 text-accent-950" : "text-text-secondary")}>{label}</a>
             ))}
           </nav>
           <div className="flex shrink-0 items-center gap-1 md:gap-2">
-            <ButtonLink href={contact.phoneHref} variant="ghost" iconOnly leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className="size-11 shrink-0 rounded-full text-accent-950 md:size-10 lg:hidden" />
-            <ButtonLink href={contact.phoneHref} variant="ghost" leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className="hidden h-10 shrink-0 rounded-full px-3 text-accent-950 lg:inline-flex">{contact.phone}</ButtonLink>
+            <ButtonLink href={contact.phoneHref} variant="ghost" iconOnly leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className="size-11 shrink-0 rounded-full text-accent-950 md:size-10 xl:hidden" />
+            <ButtonLink href={contact.phoneHref} variant="ghost" leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className="hidden h-10 shrink-0 rounded-full px-3 text-accent-950 xl:inline-flex">{contact.phone}</ButtonLink>
             <ButtonLink href="#offer" aria-label="Get My Offer" iconOnly={isScrolled} leadingIcon={isScrolled ? RiArrowRightUpLine : undefined} trailingIcon={!isScrolled ? RiArrowRightUpLine : undefined} className={cx("hidden h-10 shrink-0 rounded-full md:inline-flex", isScrolled ? "w-10 p-0" : "px-4")}>Get My Offer</ButtonLink>
-            <Button variant="ghost" iconOnly leadingIcon={isMenuOpen ? RiCloseLine : RiMenu3Line} aria-label={isMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMenuOpen} aria-controls="mobile-navigation" popoverTarget="mobile-navigation" className="size-11 shrink-0 rounded-full text-accent-950 md:hidden" />
+            <Button variant="ghost" iconOnly leadingIcon={isMenuOpen ? RiCloseLine : RiMenu3Line} aria-label={isMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMenuOpen} aria-controls="mobile-navigation" popoverTarget="mobile-navigation" className="size-11 shrink-0 rounded-full text-accent-950 lg:hidden" />
           </div>
         </div>
-        <nav id="mobile-navigation" popover="auto" onToggle={(event) => setIsMenuOpen(event.newState === "open")} aria-label="Mobile navigation" className="genesis-mobile-nav rounded-3xl border border-border-button-default bg-background-secondary-default/95 p-4 text-body-medium text-accent-950 backdrop-blur-2xl md:hidden">
+        <nav id="mobile-navigation" popover="auto" onToggle={(event) => setIsMenuOpen(event.newState === "open")} aria-label="Mobile navigation" className="genesis-mobile-nav rounded-3xl border border-border-button-default bg-background-secondary-default/95 p-4 text-body-medium text-accent-950 backdrop-blur-2xl lg:hidden">
           <div className="flex flex-col gap-1">
             {navLinks.map(({ label, href }) => (
               <a key={href} href={href} onClick={closeMenu} aria-current={activeSection === href ? "location" : undefined} className={cx("nav-link rounded-xl px-3 py-3", activeSection === href && "bg-accent-100/70")}>{label}</a>
@@ -233,7 +232,6 @@ export default function Home() {
           </div>
         </section>
         <Comparison2 />
-        <Reviews />
         <section id="our-team" aria-labelledby="team-heading" className="scroll-mt-28 px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-6xl">
             <div className="text-center">
