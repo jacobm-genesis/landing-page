@@ -8,9 +8,9 @@ const faqs = [
   { question: "Do I need to make repairs or clean the house?", answer: "No. We buy houses as-is, in any condition. Take what you want to keep and leave the rest behind.", confirmed: true },
   { question: "What if I’m behind on payments or facing foreclosure?", answer: "We can help. We work with homeowners facing foreclosure, divorce, relocation, or an inherited property. Any remaining mortgage is paid off from the sale at closing.", confirmed: true },
   { question: "Are we real estate agents?", answer: "No. We’re a local Jacksonville home-buying company, not a listing agent. We make you a direct cash offer, so there’s no listing, no showings, and no commission.", confirmed: true },
-  { question: "How do you come up with your offer?", answer: "We look at your home’s condition, the repairs it needs, and what similar homes nearby have recently sold for. Then we walk you through the number so you can see how we got there.", confirmed: false },
-  { question: "Who handles the closing?", answer: "A licensed local title company handles the closing, so your sale and your money are handled securely and by the book.", confirmed: false },
-  { question: "Do you buy houses with tenants living in them?", answer: "Yes. We can buy rental properties with tenants still in place.", confirmed: false },
+  { question: "How do you come up with your offer?", answer: "We look at your home’s condition, the repairs it needs, and what similar homes nearby have recently sold for. Then we walk you through the number so you can see how we got there.", confirmed: true },
+  { question: "Who handles the closing?", answer: "A licensed local title company handles the closing, so your sale and your money are handled securely and by the book.", confirmed: true },
+  { question: "Do you buy houses with tenants living in them?", answer: "Yes. We can buy rental properties with tenants still in place.", confirmed: true },
   { question: "What areas do you buy in?", answer: "Jacksonville and Pensacola are our specialties, and we buy houses all across Florida and in other states too.", confirmed: true },
   { question: "Is there any obligation if I request an offer?", answer: "None. Getting an offer is free, and you’re never under any obligation to accept it.", confirmed: true },
 ];
