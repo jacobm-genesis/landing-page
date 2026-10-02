@@ -127,6 +127,7 @@ export default function Home() {
       </header>
       <main id="main">
         <section className="genesis-hero relative flex min-h-svh w-full items-center bg-accent-950 text-text-white" aria-labelledby="hero-heading">
+          <video className="genesis-hero-video" src="/hero.mp4" poster="/hero.jpg" autoPlay muted loop playsInline aria-hidden />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-20 pt-32 sm:px-8 sm:pt-36 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-28 xl:px-10">
             <div className="hero-copy min-w-0 lg:col-span-7">
               <Badge className="mb-6 gap-2 rounded-full border border-accent-200/60 bg-accent-950/50 px-4 py-2 text-body-medium text-accent-50">

@@ -71,7 +71,7 @@ The visual design began with the generated [hero design reference](design/hero-d
 
 ## Hero photograph
 
-`public/hero.jpg` is the supplied “ChatGPT Image Sep 28, 2026, 09_35_07 AM-2.png”, converted to JPEG at its original 1672 × 941 resolution for the hero and closing CTA backgrounds. The responsive forest-green overlay in `styles/globals.css` preserves copy contrast; on mobile the image fades into the green surface behind the form.
+The hero background is `public/hero.mp4`, an 8-second seamless loop (1920 × 1080, Higgsfield Seedance 2.5) of a generated Florida home with no people, animated from its first frame `public/hero.jpg` (Higgsfield Soul Location). `hero.jpg` is the video poster, the reduced-motion fallback, and the closing CTA background. The forest-green overlay (`.genesis-hero::before` in `styles/globals.css`) sits above the video to keep copy readable; on mobile it fades into the green surface behind the form.
 
 ### Previous background generation prompt
 
