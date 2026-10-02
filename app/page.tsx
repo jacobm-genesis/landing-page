@@ -23,7 +23,7 @@ const navLinks = [
   { label: "Why Us", href: "#why-us" },
   { label: "Our Team", href: "#our-team" },
   { label: "FAQ", href: "#faq" },
-  { label: "Wholesalers", href: "/jv" },
+  { label: "Partner With Us", href: "/jv" },
 ];
 
 const teamMembers = [
@@ -280,7 +280,7 @@ export default function Home() {
           <a href="/privacy" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</a>
           <a href="/terms" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</a>
           <a href="/text-us" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Text Us</a>
-          <a href="/jv" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Wholesalers: Submit a Deal</a>
+          <a href="/jv" className="rounded-md text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Partner With Us</a>
         </div>
       </footer>
     </>

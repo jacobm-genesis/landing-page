@@ -7,8 +7,8 @@ import { JvDealForm } from "@/components/ui/jv-deal-form";
 import { company, contact } from "@/components/ui/legal-page";
 
 export const metadata: Metadata = {
-  title: "Submit a Wholesale Deal | JV Dispo with Genesis Home Buyers LLC",
-  description: "Have a wholesale deal under contract? Send it to Genesis Home Buyers. We market it to our buyers and split the assignment fee 50/50.",
+  title: "Partner With Us | Joint Venture Deals with Genesis Home Buyers LLC",
+  description: "Have a property under contract? Partner with Genesis Home Buyers on a joint venture. We market it to our buyers and split the assignment fee 50/50.",
 };
 
 const linkClass = "rounded-md text-accent-700 underline underline-offset-4 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring";
@@ -39,11 +39,11 @@ export default function JvPage() {
               Back to home
             </Link>
             <div className="mt-8">
-              <Badge className="rounded-full border border-accent-200/60 bg-accent-950/50 px-4 py-2 text-body-medium text-accent-50">For wholesalers · 50/50 JV split</Badge>
+              <Badge className="rounded-full border border-accent-200/60 bg-accent-950/50 px-4 py-2 text-body-medium text-accent-50">Joint venture partners · 50/50 split</Badge>
             </div>
-            <h1 className="mt-5 max-w-3xl text-balance text-display-4-bold sm:text-display-2-bold">Got a deal under contract? We’ll dispo it.</h1>
-            <p className="mt-6 max-w-2xl text-title-3-regular text-accent-50">Send us your wholesale deal. We market it to our buyers, handle the assignment, and split the assignment fee with you 50/50 when it closes.</p>
-              <ButtonLink href="#submit-deal" trailingIcon={RiArrowDownLine} className="mt-8 h-12 rounded-full px-6 text-headline-semibold">Submit My Deal</ButtonLink>
+            <h1 className="mt-5 max-w-3xl text-balance text-display-4-bold sm:text-display-2-bold">Got a deal under contract? We’ll find the buyer.</h1>
+            <p className="mt-6 max-w-2xl text-title-3-regular text-accent-50">Send us your deal. We market it to our buyers, handle the assignment, and split the assignment fee with you 50/50 when it closes.</p>
+            <ButtonLink href="#submit-deal" trailingIcon={RiArrowDownLine} className="mt-8 h-12 rounded-full px-6 text-headline-semibold">Submit My Deal</ButtonLink>
           </div>
         </section>
 
