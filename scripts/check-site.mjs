@@ -20,7 +20,7 @@ const staticForm = await blueprint.text();
 const inputs = [...form.matchAll(/<input\b[^>]*>/g)].map(([tag]) => tag);
 for (const [name, type, autocomplete] of [
   ['name', 'text', 'name'], ['email', 'email', 'email'],
-  ['phone', 'tel', 'tel'], ['address', 'text', 'street-address'],
+  ['phone', 'tel', 'tel'], ['address', 'text', 'off'], // Google address suggestions replace browser autofill here
 ]) {
   const tag = inputs.find(tag => tag.includes(`name="${name}"`));
   assert.ok(tag, `Missing ${name}`);

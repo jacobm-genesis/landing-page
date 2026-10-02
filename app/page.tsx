@@ -12,6 +12,7 @@ import { Button, ButtonLink } from "@/components/base/buttons/button";
 import { Checkbox } from "@/components/base/checkbox/checkbox";
 import { Divider } from "@/components/base/divider/divider";
 import { Input } from "@/components/base/input/input";
+import { AddressAutocomplete } from "@/components/ui/address-autocomplete";
 import { Comparison2 } from "@/components/ui/comparison-2";
 import { Faq } from "@/components/ui/faq";
 import { contact } from "@/components/ui/legal-page";
@@ -189,7 +190,7 @@ export default function Home() {
                       <Input label="Email" name="email" type="email" autoComplete="email" placeholder="you@example.com" isRequired validationBehavior="native" fieldClassName="offer-field" inputClassName="text-headline-regular" />
                     </div>
                     <Input label="Phone Number" name="phone" type="tel" autoComplete="tel" placeholder="(555) 123-4567" isRequired validationBehavior="native" fieldClassName="offer-field" inputClassName="text-headline-regular" />
-                    <Input label="Property Address" name="address" autoComplete="street-address" placeholder="Street address, city, state, ZIP" leadingIcon={RiMapPinLine} isRequired validationBehavior="native" fieldClassName="offer-field" inputClassName="text-headline-regular" />
+                    <AddressAutocomplete />
                     <Checkbox name="sms_consent_transactional" value="yes" className="items-start [&>span:last-child]:text-caption-1-regular [&>span:last-child]:text-text-secondary">
                       I consent to receive transactional (non-marketing) text messages from Genesis Home Buyers LLC (registered as SXSXSX LLC) about my property inquiry, such as offer updates and appointment reminders, at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Reply HELP for help or STOP to opt out.
                     </Checkbox>
