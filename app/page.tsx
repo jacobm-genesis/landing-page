@@ -30,8 +30,8 @@ const navLinks = [
 ];
 
 const teamMembers = [
-  { name: "Dustin Fox", photo: "/team/dustin-fox.jpg", title: "Co-Founder & COO" },
   { name: "Jacob Monoson", photo: "/team/jacob-monoson.jpg", title: "Founder & CEO" },
+  { name: "Dustin Fox", photo: "/team/dustin-fox.jpg", title: "Co-Founder & COO" },
   { name: "Devon Nicol", photo: "/team/devon-nicol.jpg", title: "Vice President" },
 ];
 
