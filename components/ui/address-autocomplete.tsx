@@ -86,7 +86,7 @@ export function AddressAutocomplete({ name = "address" }: { name?: string }) {
         onKeyDown={onKeyDown}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
         aria-autocomplete="list"
-        aria-controls={listId}
+        aria-controls={open ? listId : undefined}
         aria-expanded={open}
         aria-activedescendant={open && active >= 0 ? `${listId}-${active}` : undefined}
       />

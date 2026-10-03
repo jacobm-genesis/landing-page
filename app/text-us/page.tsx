@@ -6,6 +6,7 @@ import { company, contact } from "@/components/ui/legal-page";
 export const metadata: Metadata = {
   title: "Text Us | Genesis Home Buyers LLC",
   description: "Send Genesis Home Buyers LLC a message and a member of our team will text you back.",
+  alternates: { canonical: "/text-us" },
 };
 
 const linkClass = "rounded-md text-accent-700 underline underline-offset-4 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring";

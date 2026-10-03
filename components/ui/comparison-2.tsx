@@ -79,7 +79,7 @@ function PayoutCard({ option, className }: { option: "traditional" | "genesis"; 
         {listingCosts.map(({ label, amount, genesis }) => (
           <div key={label} className="flex items-baseline justify-between gap-3 py-2">
             <dt className={cx("text-body-regular", isGenesis ? "text-accent-100" : "text-text-secondary")}>{isGenesis ? label.replace(/ \(.*\)$/, "") : label}</dt>
-            <dd className={cx("shrink-0 text-body-semibold", isGenesis ? "text-accent-300" : "text-text-error-primary")}>{isGenesis ? (genesis ?? "$0") : `−${usd(amount)}`}</dd>
+            <dd className={cx("shrink-0 text-body-semibold", isGenesis ? "text-accent-300" : "text-foreground-icon-error")}>{isGenesis ? (genesis ?? "$0") : `−${usd(amount)}`}</dd>
           </div>
         ))}
       </dl>
@@ -139,7 +139,7 @@ export function Comparison2({ city = "Jacksonville" }: { city?: string }) {
             ))}
           </ul>
         </div>
-        <p className="mx-auto mt-4 max-w-3xl text-center text-caption-1-regular text-text-tertiary">Example for a {usd(listPrice)} home that sells after {monthsListed} months. Typical costs shown; your actual costs and our offer depend on your home’s condition, price, and market.</p>
+        <p className="mx-auto mt-4 max-w-3xl text-center text-caption-1-regular text-text-secondary">Example for a {usd(listPrice)} home that sells after {monthsListed} months. Typical costs shown; your actual costs and our offer depend on your home’s condition, price, and market.</p>
 
         <div className="mt-8 flex flex-col items-center gap-4 text-center sm:mt-10">
           <ButtonLink href="#offer" trailingIcon={RiArrowRightLine} className="h-12 rounded-full px-6 text-body-semibold">See What We’d Offer</ButtonLink>

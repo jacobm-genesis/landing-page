@@ -5,6 +5,7 @@ import { company, ContactDetails, LegalPage, type LegalSection } from "@/compone
 export const metadata: Metadata = {
   title: "Privacy Policy | Genesis Home Buyers LLC",
   description: "How Genesis Home Buyers LLC collects, uses, and protects your information, including our SMS text messaging practices.",
+  alternates: { canonical: "/privacy" },
 };
 
 const sections: LegalSection[] = [

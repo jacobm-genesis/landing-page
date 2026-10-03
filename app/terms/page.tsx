@@ -5,6 +5,7 @@ import { company, contact, ContactDetails, LegalPage, type LegalSection } from "
 export const metadata: Metadata = {
   title: "Terms & Conditions | Genesis Home Buyers LLC",
   description: "Terms for using the Genesis Home Buyers LLC website and our SMS text messaging program.",
+  alternates: { canonical: "/terms" },
 };
 
 const sections: LegalSection[] = [

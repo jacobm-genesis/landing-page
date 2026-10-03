@@ -9,6 +9,7 @@ import { company, contact } from "@/components/ui/legal-page";
 export const metadata: Metadata = {
   title: "Partner With Us | Joint Venture Deals with Genesis Home Buyers LLC",
   description: "Have a property under contract? Partner with Genesis Home Buyers on a joint venture. We market it to our buyers and split the assignment fee 50/50.",
+  alternates: { canonical: "/jv" },
 };
 
 const linkClass = "rounded-md text-accent-700 underline underline-offset-4 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring";
