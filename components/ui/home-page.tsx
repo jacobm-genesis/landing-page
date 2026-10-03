@@ -57,7 +57,7 @@ function GenesisLogo() {
   );
 }
 
-/** Local-only easter egg: opens in the YouTube app on phones (falls back to the website), new tab on desktop. */
+/** Easter egg: opens in the YouTube app on phones (falls back to the website), new tab on desktop. */
 function openRickRoll() {
   const id = "dQw4w9WgXcQ";
   const web = `https://www.youtube.com/watch?v=${id}`;
@@ -95,6 +95,16 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
     return () => window.removeEventListener("scroll", update);
   }, []);
   const stickyBarVisible = showStickyBar && submission !== "success";
+
+  const devonTaps = useRef<number[]>([]);
+  function countDevonTap() {
+    const now = Date.now();
+    devonTaps.current = [...devonTaps.current.filter((tap) => now - tap < 1500), now];
+    if (devonTaps.current.length >= 3) {
+      devonTaps.current = [];
+      openRickRoll();
+    }
+  }
 
   // Start the hero video only after the page has loaded, so the poster and form appear first on slow phones.
   // Skipped for reduced motion and data-saver users, who keep the still poster.
@@ -276,7 +286,7 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
         {market.situation && (
           <section aria-labelledby="situation-heading" className="px-5 py-16 sm:px-8 lg:py-20">
             <div className="mx-auto max-w-6xl">
-              <div className="max-w-2xl">
+              <div className="mx-auto max-w-2xl text-center">
                 <p className="mb-3 text-caption-1-semibold tracking-widest text-accent-600">{market.situation.eyebrow}</p>
                 <h2 id="situation-heading" className="text-display-4-bold text-accent-950 sm:text-display-3-bold">{market.situation.title}</h2>
                 <p className="mt-4 text-headline-regular text-text-secondary">{market.situation.intro}</p>
@@ -292,7 +302,9 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
                   </li>
                 ))}
               </ul>
-              <ButtonLink href="#offer" trailingIcon={RiArrowRightUpLine} className="mt-8 h-12 rounded-full px-6 text-headline-semibold">Get My Cash Offer</ButtonLink>
+              <div className="mt-8 flex justify-center">
+                <ButtonLink href="#offer" trailingIcon={RiArrowRightUpLine} className="h-12 rounded-full px-6 text-headline-semibold">Get My Cash Offer</ButtonLink>
+              </div>
             </div>
           </section>
         )}
@@ -335,11 +347,11 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
               {teamMembers.map(({ name, photo, title }) => (
                 <article key={name} className="team-card relative flex flex-col items-center overflow-hidden rounded-3xl border border-border-button-default bg-background-primary-default px-7 pb-8 pt-10 text-center">
                   <div aria-hidden className="absolute inset-x-0 top-0 h-24 border-b border-accent-200 bg-accent-50" />
-                  {name === "Devon Nicol" && process.env.NODE_ENV === "development" ? (
-                    // Local-only easter egg: never ships, because production builds drop this branch.
-                    <button type="button" onClick={openRickRoll} aria-label={`Open a surprise from ${name}`} className="relative cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
+                  {name === "Devon Nicol" ? (
+                    // Easter egg: three quick taps on Devon's photo opens a surprise. A single tap does nothing.
+                    <div onClick={countDevonTap} className="relative touch-manipulation">
                       <Avatar src={photo} alt={name} className="relative size-28 border-4 border-background-primary-default bg-accent-200 shadow-sm [&_img]:object-top" />
-                    </button>
+                    </div>
                   ) : (
                     <Avatar src={photo} alt={name} className="relative size-28 border-4 border-background-primary-default bg-accent-200 shadow-sm [&_img]:object-top" />
                   )}
