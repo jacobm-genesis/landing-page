@@ -15,6 +15,14 @@ export type Market = {
   localReason: { title: string; description: string };
   /** Answer to "Are we real estate agents?". */
   agentsAnswer: string;
+  /** Situation pages: a "how we help" section under the hero, and FAQs shown before the general ones. */
+  situation?: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    points: { title: string; text: string }[];
+    faqs: { question: string; answer: string }[];
+  };
 };
 
 export const markets = {

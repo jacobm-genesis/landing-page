@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import {
-  RiArrowRightLine, RiCalendarCheckLine,
+  RiArrowRightLine, RiCalendarCheckLine, RiCheckLine,
   RiHeartLine, RiHome4Line, RiMapPinLine, RiShieldCheckLine,
   RiFlashlightLine, RiCoinsLine, RiArrowRightUpLine, RiMenu3Line, RiCloseLine, RiPhoneLine,
 } from "@remixicon/react";
@@ -22,6 +22,7 @@ import OnboardingBlock from "@/components/ui/onboarding-setup-steps";import { cx
 import { trackOfferLead } from "@/utils/google-ads";
 import { captureLeadSource, leadSourceFields } from "@/utils/lead-source";
 import { markets, type Market } from "@/utils/markets";
+import { situations } from "@/utils/situations";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -256,6 +257,29 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
           <RiHome4Line className="size-6 shrink-0 text-accent-700" aria-hidden />
           <span>{market.tagline}</span>
         </div>
+        {market.situation && (
+          <section aria-labelledby="situation-heading" className="px-5 py-16 sm:px-8 lg:py-20">
+            <div className="mx-auto max-w-6xl">
+              <div className="max-w-2xl">
+                <p className="mb-3 text-caption-1-semibold tracking-widest text-accent-600">{market.situation.eyebrow}</p>
+                <h2 id="situation-heading" className="text-display-4-bold text-accent-950 sm:text-display-3-bold">{market.situation.title}</h2>
+                <p className="mt-4 text-headline-regular text-text-secondary">{market.situation.intro}</p>
+              </div>
+              <ul className="mt-10 grid gap-5 sm:grid-cols-2">
+                {market.situation.points.map(({ title, text }) => (
+                  <li key={title} className="flex gap-4 rounded-3xl border border-border-button-default bg-background-primary-default p-6">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent-100 text-accent-700"><RiCheckLine className="size-5" aria-hidden /></span>
+                    <div>
+                      <h3 className="text-title-3-semibold text-accent-950">{title}</h3>
+                      <p className="mt-1 text-headline-regular text-text-secondary">{text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <ButtonLink href="#offer" trailingIcon={RiArrowRightUpLine} className="mt-8 h-12 rounded-full px-6 text-headline-semibold">Get My Cash Offer</ButtonLink>
+            </div>
+          </section>
+        )}
         <OnboardingBlock />
         <section id="why-us" aria-labelledby="why-heading" className="genesis-glass-stage scroll-mt-28 border-y border-separator-border bg-background-primary-default px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-7xl">
@@ -310,7 +334,7 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
             </div>
           </div>
         </section>
-        <Faq agentsAnswer={market.agentsAnswer} />
+        <Faq agentsAnswer={market.agentsAnswer} extraFaqs={market.situation?.faqs} />
         <section aria-labelledby="cta-heading" className="closing-cta relative mx-3 mb-12 overflow-hidden rounded-3xl border border-border-button-default bg-accent-950 px-6 py-12 text-text-white sm:mx-5 sm:px-10 lg:py-16">
           <div className="relative mx-auto flex max-w-6xl flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div className="max-w-2xl">
@@ -327,6 +351,9 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
         <address className="flex flex-col items-center gap-1 not-italic sm:items-start">
           <span>{contact.address}</span>
           <span>We buy houses in <Link href="/" className="rounded-md text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Jacksonville</Link>{" · "}<Link href="/pensacola" className="rounded-md text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Pensacola</Link></span>
+          <span>We help with {situations.map(({ slug, label }, index) => (
+            <span key={slug}>{index > 0 && " · "}<Link href={`/${slug}`} className="rounded-md text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">{label}</Link></span>
+          ))}</span>
           <span>
             <a href={contact.phoneHref} className="rounded-md text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">{contact.phone}</a>
             {" · "}
@@ -335,10 +362,10 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
         </address>
         <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
           <p>© 2026 Genesis Home Buyers LLC.</p>
-          <a href="/privacy" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</a>
-          <a href="/terms" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</a>
-          <a href="/text-us" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Text Us</a>
-          <a href="/jv" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Submit a Deal – JV</a>
+          <Link href="/privacy" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</Link>
+          <Link href="/terms" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</Link>
+          <Link href="/text-us" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Text Us</Link>
+          <Link href="/jv" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Submit a Deal – JV</Link>
         </div>
       </footer>
       <div aria-hidden={!stickyBarVisible} inert={!stickyBarVisible} className={cx("genesis-sticky-bar fixed inset-x-0 bottom-0 z-30 border-t border-border-button-default bg-background-secondary-default/90 px-4 pt-3 backdrop-blur-2xl transition-transform duration-300 md:hidden", stickyBarVisible ? "translate-y-0" : "translate-y-full")}>

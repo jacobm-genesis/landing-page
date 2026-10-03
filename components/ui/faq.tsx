@@ -17,7 +17,7 @@ const faqs = [
 ];
 
 /** City pages pass their own answer to "Are we real estate agents?". */
-export function Faq({ agentsAnswer = markets.jacksonville.agentsAnswer }: { agentsAnswer?: string }) {
+export function Faq({ agentsAnswer = markets.jacksonville.agentsAnswer, extraFaqs = [] }: { agentsAnswer?: string; extraFaqs?: { question: string; answer: string }[] }) {
   const showDraftTags = process.env.NODE_ENV === "development";
   return (
     <section id="faq" aria-labelledby="faq-heading" className="scroll-mt-28 border-t border-separator-border bg-background-secondary-default px-5 py-16 sm:px-8 lg:py-20">
@@ -27,7 +27,7 @@ export function Faq({ agentsAnswer = markets.jacksonville.agentsAnswer }: { agen
           <h2 id="faq-heading" className="text-display-4-bold text-accent-950 sm:text-display-3-bold">Frequently Asked Questions</h2>
         </div>
         <div className="mt-10 divide-y divide-separator-border rounded-3xl border border-border-button-default bg-background-primary-default">
-          {faqs.map(({ question, answer: defaultAnswer, confirmed }) => {
+          {[...extraFaqs.map((faq) => ({ ...faq, confirmed: true })), ...faqs].map(({ question, answer: defaultAnswer, confirmed }) => {
             const answer = question === "Are we real estate agents?" ? agentsAnswer : defaultAnswer;
             return (
             <details key={question} className="group px-5 sm:px-7">
