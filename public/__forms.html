@@ -6,7 +6,7 @@
     <title>Genesis offer form definition</title>
   </head>
   <body>
-    <!-- Netlify detects this static definition when deploying Next.js. Keep field names in sync with app/page.tsx. -->
+    <!-- Netlify detects this static definition when deploying Next.js. Keep field names in sync with components/ui/home-page.tsx. -->
     <form name="offer" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="offer" />
       <input name="bot-field" type="text" />
@@ -32,8 +32,9 @@
       <input name="referrer" type="hidden" />
     </form>
     <!-- Optional second step after an offer request; keep in sync with components/ui/offer-details-form.tsx. -->
-    <form name="offer-details" method="POST" data-netlify="true" hidden>
+    <form name="offer-details" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="offer-details" />
+      <input name="bot-field" type="text" />
       <input name="name" type="hidden" />
       <input name="email" type="hidden" />
       <input name="phone" type="hidden" />

@@ -55,7 +55,7 @@ export function OfferDetailsForm({ contact }: { contact: OfferContact }) {
   }
 
   return (
-    <form name="offer-details" method="POST" action="/__forms.html" onSubmit={submitDetails} className="flex flex-col gap-5" aria-busy={status === "sending"}>
+    <form name="offer-details" method="POST" action="/__forms.html" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={submitDetails} className="flex flex-col gap-5" aria-busy={status === "sending"}>
       <div role="status" className="flex items-start gap-3 rounded-xl bg-accent-50 p-4">
         <RiShieldCheckLine className="mt-0.5 size-6 shrink-0 text-accent-600" aria-hidden />
         <div>
@@ -64,6 +64,7 @@ export function OfferDetailsForm({ contact }: { contact: OfferContact }) {
         </div>
       </div>
       <input type="hidden" name="form-name" value="offer-details" />
+      <div hidden aria-hidden="true"><Input label="Leave this field empty" name="bot-field" autoComplete="off" /></div>
       {Object.entries(contact).map(([key, value]) => <input key={key} type="hidden" name={key} value={value} />)}
       <input type="hidden" name="zillow_link" value={zillowLink(contact.address)} />
 

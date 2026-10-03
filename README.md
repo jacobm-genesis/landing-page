@@ -31,7 +31,7 @@ If port 3000 is occupied, use `npm run dev -- --port 3001`.
 
 ## Netlify lead capture
 
-The visible form in `app/page.tsx` posts URL-encoded data to `/__forms.html` (Netlify publishes the equivalent clean URL `/__forms`). `public/__forms.html` is the matching static definition. All four lead field names and the hidden `bot-field` honeypot must stay in sync. The form validates required fields and email format, prevents duplicate clicks during submission, shows success only after an accepted response, and retains entered details after a failure.
+The visible form in `components/ui/home-page.tsx` (shared by `/` and `/pensacola`) posts URL-encoded data to `/__forms.html` (Netlify publishes the equivalent clean URL `/__forms`). `public/__forms.html` is the matching static definition. All four lead field names and the hidden `bot-field` honeypot must stay in sync. The form validates required fields and email format, prevents duplicate clicks during submission, shows success only after an accepted response, and retains entered details after a failure.
 
 Form detection is enabled and Netlify has detected the `offer` form with all four lead fields and the honeypot. No test lead was submitted. Leads appear under **Forms → offer** in the Netlify project. Local servers do not collect leads; an attempted submission displays the error state.
 
@@ -60,7 +60,7 @@ TypeScript, Tailwind v4, and the `@/*` import alias are already configured. Shar
 
 The visual design began with the generated [hero design reference](design/hero-design-reference.png), with its [full generation prompt](design/hero-design-prompt.md). It uses live BoardUI controls and text. The updated house photograph fills the hero edge to edge and at least the viewport height, with space below the floating navbar for the headline and form. A layered offer form, benefit tiles, numbered process cards, a green stats panel, and team cards carry the visual direction through the page.
 
-- Page sections, form, and team members: `app/page.tsx`.
+- Page sections, form, and team members: `components/ui/home-page.tsx`. City wording: `utils/markets.ts` (add a market plus an `app/<city>/page.tsx` for a new city page).
 - Navigation adapts the floating glass navbar from `hyperattention-landing`: it narrows after scrolling, highlights the current section, and uses a native mobile popover with outside-click and Escape dismissal. Controls remain installed BoardUI components with Genesis semantic colors; motion respects reduced-motion preferences.
 - Header and footer use `public/genesis-logo-transparent.png`, a background extraction from the supplied artwork made with the built-in imagegen tool and verified to contain real alpha transparency. Fitted SVG image windows arrange the existing mark beside its original lettering for a compact horizontal logo; neither is redrawn. The unchanged upload remains in `public/genesis-logo.png`. See the [extraction prompt](design/logo-background-extraction-prompt.md).
 - Forest-green and cream primitives, including all eleven green accent mappings: `styles/theme.css`.
