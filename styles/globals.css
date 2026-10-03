@@ -1143,3 +1143,20 @@ html {
     scroll-behavior: auto;
   }
 }
+
+/* Phone sticky bar: clear the iPhone home indicator, and keep the footer readable above the bar. */
+.genesis-sticky-bar {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 767px) {
+  body:has(.genesis-sticky-bar) {
+    padding-bottom: 5.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genesis-sticky-bar {
+    transition: none;
+  }
+}

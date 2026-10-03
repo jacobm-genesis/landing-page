@@ -67,6 +67,18 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
 
   useEffect(captureLeadSource, []);
 
+  // Phone-only bar with Call and Get My Offer, shown once the seller has scrolled past the offer form.
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  useEffect(() => {
+    const offer = document.getElementById("offer");
+    if (!offer) return;
+    const update = () => setShowStickyBar(offer.getBoundingClientRect().bottom < 0);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+  const stickyBarVisible = showStickyBar && submission !== "success";
+
   // Start the hero video only after the page has loaded, so the poster and form appear first on slow phones.
   // Skipped for reduced motion and data-saver users, who keep the still poster.
   const heroVideo = useRef<HTMLVideoElement>(null);
@@ -283,7 +295,14 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
               {teamMembers.map(({ name, photo, title }) => (
                 <article key={name} className="team-card relative flex flex-col items-center overflow-hidden rounded-3xl border border-border-button-default bg-background-primary-default px-7 pb-8 pt-10 text-center">
                   <div aria-hidden className="absolute inset-x-0 top-0 h-24 border-b border-accent-200 bg-accent-50" />
-                  <Avatar src={photo} alt={name} className="relative size-28 border-4 border-background-primary-default bg-accent-200 shadow-sm [&_img]:object-top" />
+                  {name === "Devon Nicol" && process.env.NODE_ENV === "development" ? (
+                    // Local-only easter egg: never ships, because production builds drop this branch.
+                    <button type="button" onClick={() => window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank", "noopener")} aria-label={`Open a surprise from ${name}`} className="relative cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
+                      <Avatar src={photo} alt={name} className="relative size-28 border-4 border-background-primary-default bg-accent-200 shadow-sm [&_img]:object-top" />
+                    </button>
+                  ) : (
+                    <Avatar src={photo} alt={name} className="relative size-28 border-4 border-background-primary-default bg-accent-200 shadow-sm [&_img]:object-top" />
+                  )}
                   <h3 className="mt-5 text-title-2-semibold text-accent-950">{name}</h3>
                   <Badge className="mt-2 rounded-full bg-accent-50 px-3 py-1 text-caption-1-medium text-accent-700">{title}</Badge>
                 </article>
@@ -322,6 +341,12 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
           <a href="/jv" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Submit a Deal – JV</a>
         </div>
       </footer>
+      <div aria-hidden={!stickyBarVisible} inert={!stickyBarVisible} className={cx("genesis-sticky-bar fixed inset-x-0 bottom-0 z-30 border-t border-border-button-default bg-background-secondary-default/90 px-4 pt-3 backdrop-blur-2xl transition-transform duration-300 md:hidden", stickyBarVisible ? "translate-y-0" : "translate-y-full")}>
+        <div className="flex gap-3">
+          <ButtonLink href={contact.phoneHref} variant="secondary" leadingIcon={RiPhoneLine} aria-label={`Call ${contact.phone}`} className="h-12 flex-1 rounded-xl text-headline-semibold">Call</ButtonLink>
+          <ButtonLink href="#offer" trailingIcon={RiArrowRightLine} className="h-12 flex-[2] rounded-xl text-headline-semibold">Get My Cash Offer</ButtonLink>
+        </div>
+      </div>
     </>
   );
 }
