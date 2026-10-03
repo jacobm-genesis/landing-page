@@ -33,7 +33,7 @@ const navLinks = [
 ];
 
 const teamMembers = [
-  { name: "Jacob Monoson", photo: "/team/jacob-monoson.jpg", title: "Founder & CEO" },
+  { name: "Jacob Monoson", photo: "/team/jacob-monoson-v2.jpg", title: "Founder & CEO" },
   { name: "Dustin Fox", photo: "/team/dustin-fox.jpg", title: "Co-Founder & COO" },
   { name: "Devon Nicol", photo: "/team/devon-nicol.jpg", title: "Vice President" },
 ];
@@ -55,6 +55,22 @@ function GenesisLogo() {
       </svg>
     </svg>
   );
+}
+
+/** Local-only easter egg: opens in the YouTube app on phones (falls back to the website), new tab on desktop. */
+function openRickRoll() {
+  const id = "dQw4w9WgXcQ";
+  const web = `https://www.youtube.com/watch?v=${id}`;
+  const userAgent = navigator.userAgent;
+  if (/Android/i.test(userAgent)) {
+    window.location.href = `intent://www.youtube.com/watch?v=${id}#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=${encodeURIComponent(web)};end`;
+  } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+    const fallback = window.setTimeout(() => { window.location.href = web; }, 1500);
+    window.addEventListener("pagehide", () => window.clearTimeout(fallback), { once: true });
+    window.location.href = `youtube://www.youtube.com/watch?v=${id}`;
+  } else {
+    window.open(web, "_blank", "noopener");
+  }
 }
 
 /** The seller landing page. The homepage uses Jacksonville; city pages pass their own market. */
@@ -321,7 +337,7 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
                   <div aria-hidden className="absolute inset-x-0 top-0 h-24 border-b border-accent-200 bg-accent-50" />
                   {name === "Devon Nicol" && process.env.NODE_ENV === "development" ? (
                     // Local-only easter egg: never ships, because production builds drop this branch.
-                    <button type="button" onClick={() => window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank", "noopener")} aria-label={`Open a surprise from ${name}`} className="relative cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
+                    <button type="button" onClick={openRickRoll} aria-label={`Open a surprise from ${name}`} className="relative cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">
                       <Avatar src={photo} alt={name} className="relative size-28 border-4 border-background-primary-default bg-accent-200 shadow-sm [&_img]:object-top" />
                     </button>
                   ) : (
