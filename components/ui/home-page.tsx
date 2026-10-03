@@ -107,7 +107,8 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
   }
 
   // Start the hero video a moment after the page has loaded, so the headline, poster and form appear first on slow phones.
-  // Phones get a smaller portrait crop. Skipped for reduced motion and data-saver users, who keep the still poster.
+  // Phones get a smaller portrait crop, and browsers that decode AV1 get the lighter AV1 file (H.264 otherwise).
+  // Skipped for reduced motion and data-saver users, who keep the still poster.
   const heroVideo = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const video = heroVideo.current;
@@ -116,7 +117,9 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
     let timer = 0;
     const play = () => {
       video.autoplay = true;
-      video.src = matchMedia("(max-width: 767px)").matches ? "/hero.mobile.mp4" : "/hero.v2.mp4";
+      const name = matchMedia("(max-width: 767px)").matches ? "/hero.mobile5" : "/hero.v5";
+      const av1 = video.canPlayType('video/mp4; codecs="av01.0.08M.08"') === "probably";
+      video.src = `${name}${av1 ? ".av1" : ""}.mp4`;
       video.play().catch(() => {});
     };
     const start = () => { timer = window.setTimeout(play, 1500); };
@@ -213,7 +216,7 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
       </header>
       <main id="main">
         <section className="genesis-hero relative flex min-h-svh w-full items-center overflow-x-clip bg-accent-950 text-text-white" aria-labelledby="hero-heading">
-          <video ref={heroVideo} className="genesis-hero-video" poster="/hero.jpg" preload="none" muted loop playsInline aria-hidden />
+          <video ref={heroVideo} className="genesis-hero-video" poster="/hero.v5.jpg" preload="none" muted loop playsInline aria-hidden />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-20 pt-32 sm:px-8 sm:pt-36 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-28 xl:px-10">
             <div className="hero-copy min-w-0 lg:col-span-7">
               <Badge className="mb-6 gap-2 rounded-full border border-accent-200/60 bg-accent-950/50 px-4 py-2 text-body-medium text-accent-50">

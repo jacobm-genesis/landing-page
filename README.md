@@ -71,7 +71,7 @@ The visual design began with the generated [hero design reference](design/hero-d
 
 ## Hero photograph
 
-The hero background is `public/hero.v2.mp4` (desktop, 1920 × 1080 H.264) and `public/hero.mobile.mp4` (phones, 720 × 960 centre crop), an 8-second seamless loop (Higgsfield Seedance 2.5) of a generated Florida home with no people, animated from its first frame `public/hero.jpg` (Higgsfield Soul Location). `hero.jpg` is the video poster, the reduced-motion fallback, and the closing CTA background. The forest-green overlay (`.genesis-hero::before` in `styles/globals.css`) sits above the video to keep copy readable; on mobile it fades into the green surface behind the form.
+The hero background is a 20-second forward-and-back drone glide over a generated Florida lakefront neighborhood at golden hour (start frame: GPT Image 2; motion: Kling 3.0 via Higgsfield; no people). Files: `public/hero.v5.av1.mp4` / `public/hero.v5.mp4` (desktop, AV1 with H.264 fallback) and `public/hero.mobile5.av1.mp4` / `public/hero.mobile5.mp4` (phones, 720 × 960 crop); the loader in `components/ui/home-page.tsx` picks AV1 when the browser supports it. `public/hero.v5.jpg` is the poster, the reduced-motion fallback, and the closing CTA background. Avoid Seedance for this video: its output drops a frame every fourth step, which shows as judder on high-refresh screens. The forest-green overlay (`.genesis-hero::before` in `styles/globals.css`) sits above the video to keep copy readable; on mobile it fades into the green surface behind the form.
 
 ### Previous background generation prompt
 

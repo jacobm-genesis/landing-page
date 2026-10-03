@@ -1,6 +1,6 @@
 # Genesis hero design reference
 
-Generated with the built-in image generation tool. `hero-design-reference.png` guides the implemented layout; the website uses live text and BoardUI controls, plus the original `public/hero.jpg` photo.
+Generated with the built-in image generation tool. `hero-design-reference.png` guides the implemented layout; the website uses live text and BoardUI controls, plus the hero poster `public/hero.v5.jpg`.
 
 Use case: ui-mockup
 Asset type: high-fidelity desktop website design reference, straight-on flat screenshot, 1600px-wide editorial art direction, landscape image.

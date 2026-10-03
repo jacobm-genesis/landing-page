@@ -968,7 +968,7 @@ input[type="search"]::-webkit-search-cancel-button {
 /* Stacking inside the hero: poster photo (background) → looping video → green overlay → content. */
 .genesis-hero {
   isolation: isolate;
-  background-image: url("/hero.jpg");
+  background-image: url("/hero.v5.jpg");
   background-position: center;
   background-size: cover;
 }
@@ -1081,7 +1081,7 @@ input[type="search"]::-webkit-search-cancel-button {
     linear-gradient(100deg,
       color-mix(in srgb, var(--color-accent-950) 97%, transparent),
       color-mix(in srgb, var(--color-accent-950) 84%, transparent)),
-    url("/hero.jpg");
+    url("/hero.v5.jpg");
   background-size: cover;
   background-position: center 60%;
 }
