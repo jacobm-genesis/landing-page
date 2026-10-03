@@ -7,3 +7,20 @@
 # scanner may ignore that one value while still scanning for real secrets.
 [build.environment]
   SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "AIzaSyA3uBP0Lb4W3r9ereQ1IuQSk2yadQ2Cx98"
+
+# Cache the hero video, poster, logo, and team photos for a week so returning visitors don't re-download them.
+# If one of these files is replaced, give it a new name (or wait up to a week for browsers to refresh).
+[[headers]]
+  for = "/hero.*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/team/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/genesis-logo-web.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"

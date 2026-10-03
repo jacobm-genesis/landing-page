@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import {
   RiArrowRightLine, RiCalendarCheckLine,
@@ -66,6 +66,21 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(captureLeadSource, []);
+
+  // Start the hero video only after the page has loaded, so the poster and form appear first on slow phones.
+  // Skipped for reduced motion and data-saver users, who keep the still poster.
+  const heroVideo = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const video = heroVideo.current;
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    if (!video || saveData || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const start = () => { video.autoplay = true; video.src = "/hero.mp4"; video.play().catch(() => {}); };
+    const resume = () => { if (!document.hidden && video.src && video.paused) video.play().catch(() => {}); };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+    document.addEventListener("visibilitychange", resume);
+    return () => { window.removeEventListener("load", start); document.removeEventListener("visibilitychange", resume); };
+  }, []);
 
   // Local preview only: open /?preview=details to see the optional details step without submitting a lead.
   useEffect(() => {
@@ -153,7 +168,7 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
       </header>
       <main id="main">
         <section className="genesis-hero relative flex min-h-svh w-full items-center overflow-x-clip bg-accent-950 text-text-white" aria-labelledby="hero-heading">
-          <video className="genesis-hero-video" src="/hero.mp4" poster="/hero.jpg" autoPlay muted loop playsInline aria-hidden />
+          <video ref={heroVideo} className="genesis-hero-video" poster="/hero.jpg" preload="none" muted loop playsInline aria-hidden />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-20 pt-32 sm:px-8 sm:pt-36 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-28 xl:px-10">
             <div className="hero-copy min-w-0 lg:col-span-7">
               <Badge className="mb-6 gap-2 rounded-full border border-accent-200/60 bg-accent-950/50 px-4 py-2 text-body-medium text-accent-50">
