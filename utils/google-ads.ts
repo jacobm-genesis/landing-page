@@ -16,3 +16,12 @@ export function trackOfferLead() {
   if (!offerLeadLabel) return;
   window.gtag?.("event", "conversion", { send_to: `${googleAdsId}/${offerLeadLabel}`, value: 1.0, currency: "USD" });
 }
+
+// Conversion label for the "Website phone click" action (Goals → Conversions → its event snippet, Click option).
+const phoneClickLabel = "x50oCLi4x44dEN65pvBE";
+
+/** Report a tap on any phone number link to Google Ads. Google counts one per ad click, so repeat taps are fine. */
+export function trackPhoneClick() {
+  if (!phoneClickLabel) return;
+  window.gtag?.("event", "conversion", { send_to: `${googleAdsId}/${phoneClickLabel}`, value: 1.0, currency: "USD", transport_type: "beacon" });
+}

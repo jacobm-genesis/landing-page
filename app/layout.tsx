@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "@/styles/globals.css";
 import { company, contact } from "@/components/ui/legal-page";
+import { PhoneClickTracking } from "@/components/ui/phone-click-tracking";
 import { cx } from "@/utils/cx";
 import { clarityProjectId } from "@/utils/clarity";
 import { googleAdsId } from "@/utils/google-ads";
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-full font-sans">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd).replace(/</g, "\\u003c") }} />
         {children}
+        <PhoneClickTracking />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`} />
         <Script id="google-ads-tag">
           {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${googleAdsId}');`}
