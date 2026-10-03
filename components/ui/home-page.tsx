@@ -106,19 +106,25 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
     }
   }
 
-  // Start the hero video only after the page has loaded, so the poster and form appear first on slow phones.
-  // Skipped for reduced motion and data-saver users, who keep the still poster.
+  // Start the hero video a moment after the page has loaded, so the headline, poster and form appear first on slow phones.
+  // Phones get a smaller portrait crop. Skipped for reduced motion and data-saver users, who keep the still poster.
   const heroVideo = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const video = heroVideo.current;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
     if (!video || saveData || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const start = () => { video.autoplay = true; video.src = "/hero.mp4"; video.play().catch(() => {}); };
+    let timer = 0;
+    const play = () => {
+      video.autoplay = true;
+      video.src = matchMedia("(max-width: 767px)").matches ? "/hero.mobile.mp4" : "/hero.v2.mp4";
+      video.play().catch(() => {});
+    };
+    const start = () => { timer = window.setTimeout(play, 1500); };
     const resume = () => { if (!document.hidden && video.src && video.paused) video.play().catch(() => {}); };
     if (document.readyState === "complete") start();
     else window.addEventListener("load", start, { once: true });
     document.addEventListener("visibilitychange", resume);
-    return () => { window.removeEventListener("load", start); document.removeEventListener("visibilitychange", resume); };
+    return () => { window.clearTimeout(timer); window.removeEventListener("load", start); document.removeEventListener("visibilitychange", resume); };
   }, []);
 
   // Local preview only: open /?preview=details to see the optional details step without submitting a lead.
