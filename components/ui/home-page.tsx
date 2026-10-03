@@ -206,13 +206,16 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
                     </div>
                     <Input label="Phone Number" name="phone" type="tel" autoComplete="tel" placeholder="(555) 123-4567" isRequired validationBehavior="native" fieldClassName="offer-field" inputClassName="text-headline-regular" />
                     <AddressAutocomplete />
-                    <Checkbox name="sms_consent_transactional" value="yes" className="items-start [&>span:last-child]:text-caption-1-regular [&>span:last-child]:text-text-secondary">
-                      I consent to receive transactional (non-marketing) text messages from Genesis Home Buyers LLC (registered as SXSXSX LLC) about my property inquiry, such as offer updates and appointment reminders, at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Reply HELP for help or STOP to opt out.
-                    </Checkbox>
-                    <Checkbox name="sms_consent_marketing" value="yes" className="items-start [&>span:last-child]:text-caption-1-regular [&>span:last-child]:text-text-secondary">
-                      I consent to receive marketing and promotional text messages from Genesis Home Buyers LLC (registered as SXSXSX LLC), such as cash offer promotions and updates about our home-buying services, at the phone number provided, possibly sent using automated technology. Consent is not a condition of any sale. Message frequency may vary. Message &amp; data rates may apply. Reply HELP for help or STOP to opt out.
-                    </Checkbox>
-                    <p className="text-caption-1-regular text-text-secondary">Both checkboxes are optional. See our <a href="/privacy" target="_blank" className="text-accent-700 underline underline-offset-2">Privacy Policy</a> and <a href="/terms" target="_blank" className="text-accent-700 underline underline-offset-2">Terms &amp; Conditions</a>.</p>
+                    {/* SMS consent: wording is registered for 10DLC; change layout only, never the text. */}
+                    <div className="flex flex-col gap-2">
+                      <Checkbox name="sms_consent_transactional" value="yes" className="items-start [&>span:last-child]:text-caption-1-regular [&>span:last-child]:text-text-secondary">
+                        I consent to receive transactional (non-marketing) text messages from Genesis Home Buyers LLC (registered as SXSXSX LLC) about my property inquiry, such as offer updates and appointment reminders, at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Reply HELP for help or STOP to opt out.
+                      </Checkbox>
+                      <Checkbox name="sms_consent_marketing" value="yes" className="items-start [&>span:last-child]:text-caption-1-regular [&>span:last-child]:text-text-secondary">
+                        I consent to receive marketing and promotional text messages from Genesis Home Buyers LLC (registered as SXSXSX LLC), such as cash offer promotions and updates about our home-buying services, at the phone number provided, possibly sent using automated technology. Consent is not a condition of any sale. Message frequency may vary. Message &amp; data rates may apply. Reply HELP for help or STOP to opt out.
+                      </Checkbox>
+                      <p className="text-caption-1-regular text-text-secondary">Both checkboxes are optional. See our <a href="/privacy" target="_blank" className="text-accent-700 underline underline-offset-2">Privacy Policy</a> and <a href="/terms" target="_blank" className="text-accent-700 underline underline-offset-2">Terms &amp; Conditions</a>.</p>
+                    </div>
                     <Button type="submit" trailingIcon={RiArrowRightLine} disabled={submission === "sending"} className="mt-2 h-12 w-full rounded-xl text-headline-semibold">{submission === "sending" ? "Sending Your Request…" : "Get My Cash Offer"}</Button>
                     {submission === "error" && <p role="alert" className="text-body-regular text-text-error-primary">We couldn’t send your request. Your details are still here — please try again.</p>}
                   </form>
