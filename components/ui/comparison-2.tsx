@@ -108,14 +108,14 @@ function ProcessCard({ option, className }: { option: "traditional" | "genesis";
   );
 }
 
-export function Comparison2() {
+export function Comparison2({ city = "Jacksonville" }: { city?: string }) {
   return (
     <section id="cash-offer-comparison" aria-labelledby="comparison-heading" className="scroll-mt-28 bg-background-secondary-default px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-2xl text-center">
           <Badge className="mb-4 rounded-full border border-accent-200 bg-accent-50 px-4 py-1.5 text-caption-1-semibold text-accent-800">WHAT YOU ACTUALLY TAKE HOME</Badge>
           <h2 id="comparison-heading" className="text-balance text-display-4-bold text-accent-950 sm:text-display-3-bold">The list price isn’t what you take home</h2>
-          <p className="mt-4 text-headline-regular text-text-secondary">Same $300,000 Jacksonville house. Two ways to sell it.</p>
+          <p className="mt-4 text-headline-regular text-text-secondary">Same $300,000 {city} house. Two ways to sell it.</p>
         </div>
 
         <PayoutSummary />

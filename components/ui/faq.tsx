@@ -1,5 +1,6 @@
 import { RiAddLine } from "@remixicon/react";
 import { contact } from "@/components/ui/legal-page";
+import { markets } from "@/utils/markets";
 
 // `confirmed: false` marks answers still awaiting Genesis's sign-off; they show a draft tag in `npm run dev`.
 const faqs = [
@@ -7,7 +8,7 @@ const faqs = [
   { question: "How fast can you close?", answer: "In as little as 7 days. If you need more time, you pick the closing date that works for you.", confirmed: true },
   { question: "Do I need to make repairs or clean the house?", answer: "No. We buy houses as-is, in any condition. Take what you want to keep and leave the rest behind.", confirmed: true },
   { question: "What if I’m behind on payments or facing foreclosure?", answer: "We can help. We work with homeowners facing foreclosure, divorce, relocation, or an inherited property. Any remaining mortgage is paid off from the sale at closing.", confirmed: true },
-  { question: "Are we real estate agents?", answer: "No. We’re a local Jacksonville home-buying company, not a listing agent. We make you a direct cash offer, so there’s no listing, no showings, and no commission.", confirmed: true },
+  { question: "Are we real estate agents?", answer: markets.jacksonville.agentsAnswer, confirmed: true },
   { question: "How do you come up with your offer?", answer: "We look at your home’s condition, the repairs it needs, and what similar homes nearby have recently sold for. Then we walk you through the number so you can see how we got there.", confirmed: true },
   { question: "Who handles the closing?", answer: "A licensed local title company handles the closing, so your sale and your money are handled securely and by the book.", confirmed: true },
   { question: "Do you buy houses with tenants living in them?", answer: "Yes. We can buy rental properties with tenants still in place.", confirmed: true },
@@ -15,7 +16,8 @@ const faqs = [
   { question: "Is there any obligation if I request an offer?", answer: "None. Getting an offer is free, and you’re never under any obligation to accept it.", confirmed: true },
 ];
 
-export function Faq() {
+/** City pages pass their own answer to "Are we real estate agents?". */
+export function Faq({ agentsAnswer = markets.jacksonville.agentsAnswer }: { agentsAnswer?: string }) {
   const showDraftTags = process.env.NODE_ENV === "development";
   return (
     <section id="faq" aria-labelledby="faq-heading" className="scroll-mt-28 border-t border-separator-border bg-background-secondary-default px-5 py-16 sm:px-8 lg:py-20">
@@ -25,7 +27,9 @@ export function Faq() {
           <h2 id="faq-heading" className="text-display-4-bold text-accent-950 sm:text-display-3-bold">Frequently Asked Questions</h2>
         </div>
         <div className="mt-10 divide-y divide-separator-border rounded-3xl border border-border-button-default bg-background-primary-default">
-          {faqs.map(({ question, answer, confirmed }) => (
+          {faqs.map(({ question, answer: defaultAnswer, confirmed }) => {
+            const answer = question === "Are we real estate agents?" ? agentsAnswer : defaultAnswer;
+            return (
             <details key={question} className="group px-5 sm:px-7">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-xl py-5 text-headline-semibold text-accent-950 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring [&::-webkit-details-marker]:hidden">
                 <span>
@@ -36,7 +40,8 @@ export function Faq() {
               </summary>
               <p className="pb-6 pr-12 text-headline-regular text-text-secondary">{answer}</p>
             </details>
-          ))}
+            );
+          })}
         </div>
         <p className="mt-6 text-center text-headline-regular text-text-secondary">
           Still have a question? Call or text <a href={contact.phoneHref} className="rounded-md text-accent-700 underline underline-offset-4 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-ring">{contact.phone}</a>.
