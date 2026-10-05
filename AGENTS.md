@@ -50,3 +50,16 @@ This project uses BoardUI (React + Tailwind CSS v4, source-owned components unde
 
 When unsure about a token, a component's API, or working example code, ask the BoardUI MCP server: `get_theme`, `get_component`, `get_usage_examples`.
 <!-- boardui:rules:end -->
+
+# SMS / A2P 10DLC compliance (do not break)
+
+The site is the registered opt-in for an A2P 10DLC texting campaign in GoHighLevel. Carrier reviewers compare the live site to the submitted campaign, and any mismatch gets the campaign rejected (error 30896) or suspended after approval. Until the owner says otherwise, these rules override any request to "clean up", reword, or redesign:
+
+- **Offer form consent checkboxes** (`components/ui/home-page.tsx`, fields `sms_consent_transactional` and `sms_consent_marketing`): never change their wording, make them required, pre-check them, merge them, or remove them. Layout and styling changes are fine. The text "Genesis Home Buyers LLC (registered as SXSXSX LLC)" stays until the owner confirms the IRS has recorded the name change and the brand is updated in GoHighLevel.
+- **Privacy Policy and Terms** (`app/privacy/page.tsx`, `app/terms/page.tsx`): do not edit the SMS, opt-in, or information-sharing sections. They must keep saying the offer form checkboxes are the only way to opt in, and that text messaging opt-in data and consent are not shared with any third parties. Never add sharing language with a qualifier like "for marketing purposes".
+- **No new SMS opt-in paths anywhere on the site:** no "text us" buttons or links, no "by texting us you agree" wording, no texting checkboxes on other forms, no chat widgets. The contact page (`app/text-us/page.tsx`) and the `/jv` page say call or email only.
+- **`/jv` deal form** (`components/ui/jv-deal-form.tsx`): keep the note that numbers submitted there are not texted. Keep the form name `jv-deal`, every field name, and the `/jv` URL, because Google Ads and GoHighLevel workflows depend on them.
+- **Form plumbing:** never rename the `offer` or `jv-deal` forms or their fields, and keep `public/__forms.html` in sync with any field you add.
+- **`public/sms-opt-in.jpg`** is the opt-in screenshot submitted to carriers; if the offer form's consent area changes visually, tell the owner before deploying.
+
+If a requested change would touch any of the above, stop and ask the owner first.
