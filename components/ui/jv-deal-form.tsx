@@ -64,7 +64,7 @@ export function JvDealForm() {
       <Input label="Deal Type" name="deal_type" placeholder="Cash, subject-to, seller finance, land, multifamily…" {...field} />
       <div className="grid gap-4 sm:grid-cols-2">
         <Input label="Contract Price" name="contract_price" inputMode="numeric" placeholder="$150,000" isRequired {...field} />
-        <Input label="Your Asking Price to Buyers" name="asking_price" inputMode="numeric" placeholder="$175,000" {...field} />
+        <Input label="Your Price to Us" name="asking_price" inputMode="numeric" placeholder="$175,000" {...field} />
         <Input label="Estimated ARV" name="arv" inputMode="numeric" placeholder="$260,000" {...field} />
         <Input label="Estimated Repairs" name="repairs" inputMode="numeric" placeholder="$40,000" {...field} />
       </div>

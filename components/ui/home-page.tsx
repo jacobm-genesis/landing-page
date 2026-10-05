@@ -29,7 +29,7 @@ const navLinks = [
   { label: "Why Us", href: "#why-us" },
   { label: "Our Team", href: "#our-team" },
   { label: "FAQ", href: "#faq" },
-  { label: "Submit a Deal – JV", href: "/jv" },
+  { label: "Sell Us Your Deal", href: "/jv" },
 ];
 
 const teamMembers = [
@@ -402,7 +402,7 @@ export function HomePage({ market = markets.jacksonville }: { market?: Market })
           <Link href="/privacy" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Privacy Policy</Link>
           <Link href="/terms" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Terms &amp; Conditions</Link>
           <Link href="/text-us" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Contact Us</Link>
-          <Link href="/jv" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Submit a Deal – JV</Link>
+          <Link href="/jv" className="rounded-md py-2 text-body-medium text-accent-700 underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-border-focus-ring">Sell Us Your Deal</Link>
         </div>
       </footer>
       <div aria-hidden={!stickyBarVisible} inert={!stickyBarVisible} className={cx("genesis-sticky-bar fixed inset-x-0 bottom-0 z-30 border-t border-border-button-default bg-background-secondary-default/90 px-4 pt-3 backdrop-blur-2xl transition-transform duration-300 md:hidden", stickyBarVisible ? "translate-y-0" : "translate-y-full")}>

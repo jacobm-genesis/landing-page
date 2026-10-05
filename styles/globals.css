@@ -1160,3 +1160,23 @@ html {
     transition: none;
   }
 }
+
+/* Deals page hero: the home drone photo under a green wash, darkest behind the left-aligned headline. */
+.deals-hero {
+  background-image:
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--color-accent-950) 94%, transparent) 0%,
+      color-mix(in srgb, var(--color-accent-950) 82%, transparent) 50%,
+      color-mix(in srgb, var(--color-accent-950) 55%, transparent) 100%),
+    url("/hero.v5.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 767px) {
+  .deals-hero {
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--color-accent-950) 86%, transparent), color-mix(in srgb, var(--color-accent-950) 86%, transparent)),
+      url("/hero.v5.jpg");
+  }
+}
