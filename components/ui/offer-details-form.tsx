@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { Radio, RadioGroup, Label } from "react-aria-components";
 import { RiArrowRightLine, RiShieldCheckLine } from "@remixicon/react";
 import { Button } from "@/components/base/buttons/button";
@@ -29,6 +30,12 @@ const field = { fieldClassName: "offer-field", inputClassName: "text-headline-re
 /** Optional second step shown after the offer request is in. Every question can be skipped. */
 export function OfferDetailsForm({ contact }: { contact: OfferContact }) {
   const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const router = useRouter();
+
+  // Sent or skipped, the seller moves on to the thank-you page (Dustin's card and "Save our number").
+  useEffect(() => {
+    if (status === "done") router.push("/thank-you");
+  }, [status, router]);
 
   async function submitDetails(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,7 +56,7 @@ export function OfferDetailsForm({ contact }: { contact: OfferContact }) {
       <div role="status" className="flex min-h-80 flex-col items-center justify-center gap-4 text-center">
         <RiShieldCheckLine className="size-12 text-accent-600" aria-hidden />
         <h3 className="text-title-2-semibold">You’re all set.</h3>
-        <p className="text-headline-regular text-text-secondary">Thank you. The Genesis team will reach out soon to talk about your property.</p>
+        <p className="text-headline-regular text-text-secondary">Taking you to your next steps…</p>
       </div>
     );
   }

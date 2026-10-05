@@ -24,3 +24,10 @@
   for = "/genesis-logo-web.png"
   [headers.values]
     Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+# "Save our number" contact card on /thank-you; text/vcard makes phones offer "Add to Contacts".
+[[headers]]
+  for = "/genesis-home-buyers.vcf"
+  [headers.values]
+    Content-Type = "text/vcard; charset=utf-8"
+    Content-Disposition = "inline; filename=\"Genesis Home Buyers.vcf\""
