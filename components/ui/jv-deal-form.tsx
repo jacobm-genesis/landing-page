@@ -73,6 +73,7 @@ export function JvDealForm() {
       <Input label="Anything Else We Should Know" name="notes" placeholder="Access, occupancy, seller situation, EMD…" {...field} />
 
       <Button type="submit" trailingIcon={RiArrowRightLine} disabled={submission === "sending"} className="mt-2 h-12 w-full rounded-xl text-headline-semibold">{submission === "sending" ? "Sending Your Deal…" : "Submit My Deal"}</Button>
+      <p className="text-caption-1-regular text-text-secondary">We’ll follow up about your deal by phone or email. We don’t send text messages to numbers submitted through this form.</p>
       {submission === "error" && <p role="alert" className="text-body-regular text-text-error-primary">We couldn’t send your deal. Your details are still here — please try again.</p>}
     </form>
   );

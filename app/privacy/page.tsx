@@ -41,7 +41,7 @@ const sections: LegalSection[] = [
       <>
         <p>If you provide your mobile number and consent to receive text messages, {company} may send you SMS messages, which may be sent using automated technology. These include messages about your property inquiry (such as offer updates, appointment scheduling and reminders, and follow-up on your request) and marketing and promotional messages about our home-buying services.</p>
         <ul>
-          <li><strong>Consent:</strong> You opt in by checking one or both of the optional text message consent boxes (one for non-marketing messages about your inquiry, one for marketing messages) when you submit the offer form on our website, or by texting us first. Consent to receive text messages is not a condition of selling your property or of any purchase.</li>
+          <li><strong>Consent:</strong> The only way to opt in is by checking one or both of the optional text message consent boxes (one for transactional messages about your inquiry, one for marketing messages) when you submit the offer form on our website. Consent to receive text messages is not a condition of selling your property or of any purchase.</li>
           <li><strong>Message frequency:</strong> Message frequency varies based on your inquiry.</li>
           <li><strong>Costs:</strong> Message and data rates may apply according to your mobile carrier plan.</li>
           <li><strong>Opt out:</strong> Reply <strong>STOP</strong> to any message at any time to unsubscribe. You will receive one final message confirming you have been unsubscribed, and no further messages will be sent.</li>
@@ -63,7 +63,7 @@ const sections: LegalSection[] = [
           <li><strong>Closing partners</strong> such as title companies and closing attorneys, only when you choose to move forward with a sale and only as needed to complete it.</li>
           <li><strong>Legal requirements</strong>, when required by law, subpoena, or court order, or to protect our rights, property, or safety or that of others.</li>
         </ul>
-        <p>None of the sharing above includes mobile phone numbers or SMS opt-in data for marketing or promotional purposes.</p>
+        <p>All of the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.</p>
       </>
     ),
   },

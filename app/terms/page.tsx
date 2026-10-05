@@ -28,7 +28,7 @@ const sections: LegalSection[] = [
       <>
         <p><strong>Program description:</strong> When you opt in, {company} will send you text messages, which may be sent using automated technology. These include messages about your property inquiry (such as offer updates, appointment scheduling and reminders, and follow-up on your request) and marketing and promotional messages about our home-buying services.</p>
         <ul>
-          <li><strong>How to opt in:</strong> Check one or both of the optional text message consent boxes (one for non-marketing messages about your inquiry, one for marketing messages) when you submit the offer form on our website, or text us first. We send marketing messages only to people who checked the marketing box. Consent is not required to request an offer and is not a condition of any sale or purchase.</li>
+          <li><strong>How to opt in:</strong> Check one or both of the optional text message consent boxes (one for transactional messages about your inquiry, one for marketing messages) when you submit the offer form on our website. This is the only way to opt in. We send marketing messages only to people who checked the marketing box. Consent is not required to request an offer and is not a condition of any sale or purchase.</li>
           <li><strong>Message frequency:</strong> Message frequency varies based on your inquiry.</li>
           <li><strong>Costs:</strong> Message and data rates may apply according to your mobile carrier plan.</li>
           <li><strong>How to opt out:</strong> Text <strong>STOP</strong> to any message to cancel. You will receive one final confirmation message, and then no further messages will be sent. To rejoin, text <strong>START</strong> or opt in again on our website.</li>
@@ -36,7 +36,7 @@ const sections: LegalSection[] = [
           <li><strong>Carriers:</strong> Mobile carriers are not liable for delayed or undelivered messages.</li>
           <li><strong>Eligibility:</strong> You must be at least 18 years old and the account holder of the mobile number, or have the account holder’s permission, to opt in.</li>
         </ul>
-        <p><strong>Privacy:</strong> No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. See our <Link href="/privacy" className="text-accent-700 underline underline-offset-4">Privacy Policy</Link> for details.</p>
+        <p><strong>Privacy:</strong> No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Text messaging originator opt-in data and consent will not be shared with any third parties. See our <Link href="/privacy" className="text-accent-700 underline underline-offset-4">Privacy Policy</Link> for details.</p>
       </>
     ),
   },
